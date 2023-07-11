@@ -34,4 +34,8 @@ const router = createRouter({
     linkExactActiveClass: 'active',
 })
 
+router.afterEach((to, from) => {
+    window.scrollTo(0, 0)
+})
+
 export default router
