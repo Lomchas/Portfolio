@@ -1,0 +1,77 @@
+.container-aboutMe {
+  width: 100vw;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+
+  .wrapper-aboutMe {
+    max-width: 1000px;
+    width: 80vw;
+    min-height: 500px;
+    box-shadow: 0 0 15px black ;
+    padding: 20px 50px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+
+    .container-illustration{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img{
+        width: 400px;
+      }
+    }
+
+    .container-info{
+      max-width: 50%;
+      display: flex;
+      flex-direction: column;
+      min-height: 200px;
+      .title{
+        font-size: 32px;
+        font-weight: bold;
+        font-style: oblique;
+        font-family: "Bruno Ace SC", cursive;
+      }
+
+      hr{
+        width: 100%;
+        opacity: .3;
+      }
+
+      .info{
+        min-height: 200px;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        word-spacing: 2px;
+        font-size: 1rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .container-btns{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 40px;
+        margin: 4px 0 20px;
+
+        a{
+          color: #2b97fa;
+          padding: 5px;
+          border-radius: 5px;
+        }
+
+        a:hover {
+          // box-shadow: 0 0 10px black;
+          text-shadow: 0 0 10px #2b97fa;
+        }
+      }
+    }
+  }
+}

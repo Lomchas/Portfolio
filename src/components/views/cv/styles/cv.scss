@@ -1,0 +1,49 @@
+.container-cv{
+    width: 90vw;
+    height: 100%;
+    background-color: transparent;
+    box-shadow: 0 0 15px black;
+    border-radius: 15px;
+    margin: 50px 0;
+    padding: 20px;
+    overflow: hidden;
+
+    .container-title{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+
+      .title{
+          text-align: center;
+          font-size: 32px;
+          font-weight: bold;
+          font-style: oblique;
+          font-family: "Bruno Ace SC", cursive;
+        }
+
+        .container-illustration{
+          img{
+            width: 180px;
+          }
+        }
+    }
+
+      hr{
+        width: 100%;
+        opacity: .3;
+      }
+
+      .wrapper-cv{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: 1100px;
+        margin: 40px 0;
+
+        .cv{
+            width: 100%;
+            height: 100%;
+        }
+      }
+}
