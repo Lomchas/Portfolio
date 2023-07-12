@@ -63,10 +63,14 @@
         }
 
         .title {
-          font-size: medium;
+          margin: 0;
+          font-size: 16px;
+          font-weight: bold;
+          font-style: oblique;
+          font-family: "Bruno Ace SC", cursive;
           text-overflow: ellipsis;
           text-transform: uppercase;
-          letter-spacing: 5px;
+          letter-spacing: 2px;
         }
 
         .container-skill-item {
