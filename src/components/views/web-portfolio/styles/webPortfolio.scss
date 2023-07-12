@@ -1,0 +1,144 @@
+.container-webPortfolio{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px;
+
+    .container-title{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 0 20px;
+
+        .title {
+            margin: 0 0 20px;
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            font-style: oblique;
+            font-family: "Bruno Ace SC", cursive;
+          }
+
+        img{
+            width: 150px;
+        }  
+
+        .nav-projects{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+
+            .btn-kindOfProject{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 120px;
+                height: 2rem;
+                background-color: transparent;
+                border: 2px solid #2b97fa;
+                border-radius: 8px;
+                margin: 0;
+                font-size: 12px;
+                font-weight: bold;
+                font-style: oblique;
+                font-family: "Bruno Ace SC", cursive;
+                text-overflow: ellipsis;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                cursor: pointer;
+            }
+
+            .active {
+                border: none;
+                box-shadow: 0 0 15px #2b97fa;
+                transform: scale(1.1);
+            }
+        }
+    }
+    hr{
+        width: 100%;
+        opacity: .3;
+    }
+    .container-projects{
+        margin: 40px 0;
+        padding: 40px 60px;
+        background-color: transparent;
+        box-shadow: 0 0 15px black;
+        border-radius: 15px;
+
+        .wrapper-projects{
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+
+            .project{
+                padding: 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 20px;
+
+                .info{
+                    min-width: 430px;
+                    max-width: 650px;
+                    margin: 0 20px;
+
+                    .name{
+                        opacity: .8;
+                        margin: 0 0 20px;
+                        font-size: 16px;
+                        font-weight: bold;
+                        font-style: oblique;
+                        font-family: "Bruno Ace SC", cursive;
+                        text-overflow: ellipsis;
+                        text-transform: uppercase;
+                        letter-spacing: 2px;
+                    }
+
+                    .desc{
+                        opacity: .5;
+                        max-height: 200px;
+                        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                        word-spacing: 1px;
+                        font-size: .9rem;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+
+                    .wrapper-src{
+                        margin: 40px 0 0;
+                        display: flex;
+                        align-items: center;
+                        gap: 50px;
+
+                        .btn-go{
+                            font-size: 13px;
+                            font-family: "Bruno Ace SC", cursive;
+                            text-overflow: ellipsis;
+                            color: #2b97fa;
+                            text-shadow: 0 3px 10px rgb(0, 0, 0);
+                        }
+                    }
+                }
+
+                .wrapper-illustration{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    
+                    img{
+                        width: 500px;
+                        box-shadow: 0 5px 50px black;
+                        border-radius: 10px;
+                    }
+                }
+            }
+            .project:nth-child(2n) {
+                flex-direction: row-reverse;
+              }
+        }
+    }
+}
