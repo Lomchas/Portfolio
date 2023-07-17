@@ -5,8 +5,8 @@
       <h2 class="title">Contact | me</h2>
     </div>
     <div class="container-form">
-      <form @submit.prevent="onSubmit()" class="form-contactMe">
-        <input type="text" id="nameField" name="name" placeholder="Name" />
+      <form @submit.prevent="onSubmit()" class="form-contactMe" autocomplete="off">
+        <input type="text" id="nameField" name="name" placeholder="Name"  />
         <input type="email" id="emailField" name="email" placeholder="Email" />
         <textarea id="msgField" name="msg" placeholder="Message" />
         <button class="btn-submit" type="submit">Send message!</button>
