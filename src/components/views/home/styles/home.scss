@@ -1,3 +1,5 @@
+@import './home@media.scss';
+
 .container-home {
   width: 100vw;
   height: 100%;
@@ -24,6 +26,8 @@
       border: 10px solid #2b97fa;
       box-shadow: 0 5px 20px rgba(0, 0, 0);
       overflow: hidden;
+      transition: all .3s ease-in-out;
+
 
       a {
         width: 100%;
