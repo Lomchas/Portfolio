@@ -1,0 +1,284 @@
+@media (min-width: 1025px) {
+  .container-cv {
+    width: 90vw;
+    height: 100%;
+    background-color: transparent;
+    box-shadow: 0 0 15px black;
+    border-radius: 15px;
+    margin: 50px 0;
+    padding: 20px;
+    overflow: hidden;
+
+    .container-title {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: center;
+      align-items: flex-end;
+
+      .title {
+        margin: 0;
+        text-align: center;
+        font-size: 32px;
+        font-weight: bold;
+        font-style: oblique;
+        font-family: "Bruno Ace SC", cursive;
+      }
+
+      .container-illustration {
+        @keyframes heartbeat {
+          0% {
+            filter: drop-shadow(0 0 0 transparent);
+          }
+          50% {
+            filter: drop-shadow(0 0 10px #2b97fa);
+          }
+          100% {
+            filter: drop-shadow(0 0 0 transparent);
+          }
+        }
+        img {
+          width: 100px;
+          transition: all 0.3s ease-in-out;
+          animation: heartbeat 1.2s infinite;
+        }
+
+        img:hover {
+          animation-play-state: paused;
+          filter: drop-shadow(0 0 10px #2b97fa);
+        }
+      }
+    }
+
+    hr {
+      width: 100%;
+      opacity: 0.3;
+    }
+
+    .wrapper-cv {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      height: 1100px;
+      margin: 40px 0;
+
+      .cv {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+@media (min-width: 800px) and (max-width: 1024px) {
+  .container-cv {
+    width: 70vw !important;
+    height: 100%;
+    background-color: transparent;
+    box-shadow: 0 0 15px black;
+    border-radius: 15px;
+    margin: 50px 0;
+    padding: 20px;
+    overflow: hidden;
+
+    .container-title {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: center;
+      align-items: flex-end;
+
+      .title {
+        margin: 0;
+        text-align: center;
+        font-size: 32px;
+        font-weight: bold;
+        font-style: oblique;
+        font-family: "Bruno Ace SC", cursive;
+      }
+
+      .container-illustration {
+        @keyframes heartbeat {
+          0% {
+            filter: drop-shadow(0 0 0 transparent);
+          }
+          50% {
+            filter: drop-shadow(0 0 10px #2b97fa);
+          }
+          100% {
+            filter: drop-shadow(0 0 0 transparent);
+          }
+        }
+        img {
+          width: 100px;
+          transition: all 0.3s ease-in-out;
+          animation: heartbeat 1.2s infinite;
+        }
+
+        img:hover {
+          animation-play-state: paused;
+          filter: drop-shadow(0 0 10px #2b97fa);
+        }
+      }
+    }
+
+    hr {
+      width: 100%;
+      opacity: 0.3;
+    }
+
+    .wrapper-cv {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      height: 1100px;
+      margin: 40px 0;
+
+      .cv {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 799px) {
+  .container-cv {
+    width: 70vw !important;
+    height: 100%;
+    background-color: transparent;
+    box-shadow: 0 0 15px black;
+    border-radius: 15px;
+    margin: 50px 0;
+    padding: 20px;
+    overflow: hidden;
+
+    .container-title {
+      display: flex;
+      flex-direction: column !important;
+      justify-content: center;
+      align-items: center !important;
+
+      .title {
+        margin: 0;
+        text-align: center;
+        font-size: 26px !important;
+        font-weight: bold;
+        font-style: oblique;
+        font-family: "Bruno Ace SC", cursive;
+      }
+
+      .container-illustration {
+        @keyframes heartbeat {
+          0% {
+            filter: drop-shadow(0 0 0 transparent);
+          }
+          50% {
+            filter: drop-shadow(0 0 10px #2b97fa);
+          }
+          100% {
+            filter: drop-shadow(0 0 0 transparent);
+          }
+        }
+        img {
+          width: 100px;
+          transition: all 0.3s ease-in-out;
+          animation: heartbeat 1.2s infinite;
+        }
+
+        img:hover {
+          animation-play-state: paused;
+          filter: drop-shadow(0 0 10px #2b97fa);
+        }
+      }
+    }
+
+    hr {
+      width: 100%;
+      opacity: 0.3;
+    }
+
+    .wrapper-cv {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      height: 1100px;
+      margin: 40px 0;
+
+      .cv {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .container-cv {
+    
+    width: 80vw !important;
+    height: 100%;
+    background-color: transparent;
+    box-shadow: 0 0 15px black;
+    border-radius: 15px;
+    margin: 50px 0;
+    padding: 20px;
+    overflow: hidden;
+
+    .container-title {
+      display: flex;
+      flex-direction: column !important;
+      justify-content: center;
+      align-items: center !important;
+
+      .title {
+        margin: 0;
+        text-align: center;
+        font-size: 24px !important;
+        font-weight: bold;
+        font-style: oblique;
+        font-family: "Bruno Ace SC", cursive;
+      }
+
+      .container-illustration {
+        @keyframes heartbeat {
+          0% {
+            filter: drop-shadow(0 0 0 transparent);
+          }
+          50% {
+            filter: drop-shadow(0 0 10px #2b97fa);
+          }
+          100% {
+            filter: drop-shadow(0 0 0 transparent);
+          }
+        }
+        img {
+          width: 80px !important;
+          transition: all 0.3s ease-in-out;
+          animation: heartbeat 1.2s infinite;
+        }
+
+        img:hover {
+          animation-play-state: paused;
+          filter: drop-shadow(0 0 10px #2b97fa);
+        }
+      }
+    }
+
+    hr {
+      width: 100%;
+      opacity: 0.3;
+    }
+
+    .wrapper-cv {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      height: 550px !important;
+      margin: 40px 0;
+
+      .cv {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
