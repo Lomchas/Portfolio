@@ -1,8 +1,12 @@
+@import './webPortfolio@media.scss';
+
 .container-webPortfolio{
+    width: 95vw;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 50px;
+    margin: 0px;
 
     .container-title{
         width: 100%;
@@ -63,7 +67,7 @@
         opacity: .3;
     }
     .container-projects{
-        margin: 40px 0;
+        margin: 40px;
         padding: 40px 60px;
         background-color: transparent;
         box-shadow: 0 0 15px black;
@@ -75,15 +79,13 @@
             gap: 80px;
 
             .project{
-                padding: 20px;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 gap: 20px;
 
                 .info{
-                    min-width: 430px;
-                    max-width: 650px;
+                    width: 50% ;
                     margin: 0 20px;
 
                     .name{
@@ -125,12 +127,13 @@
                 }
 
                 .wrapper-illustration{
+                    width: 40%;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     
                     img{
-                        width: 500px;
+                        width: 100%;
                         box-shadow: 0 5px 50px black;
                         border-radius: 10px;
                     }
