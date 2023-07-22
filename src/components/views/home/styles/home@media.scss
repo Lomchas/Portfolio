@@ -155,7 +155,7 @@
 
 @media (min-width: 800px) and (max-width: 1024px) {
   .container-home {
-    width: 100vw;
+    width: 100vw !important;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -310,10 +310,11 @@
 
 @media (max-width: 799px) {
   .container-home {
-    width: 100vw;
+    width: 100vw !important;
     height: 100%;
     display: flex;
     flex-direction: column;
+    padding: 0 0 200px !important;
 
     .container-greeting {
       padding: 0 20px;
