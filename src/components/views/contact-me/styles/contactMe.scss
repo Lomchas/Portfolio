@@ -1,3 +1,5 @@
+@import './contactMe@media.scss';
+
 .container-contactMe {
   display: flex;
   justify-content: center;
@@ -13,9 +15,10 @@
   height: 100%;
 
   .container-title {
+    width: 30%;
     padding: 0 0 5px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
 
     img {
@@ -26,7 +29,7 @@
       margin: 0;
       text-align: center;
       text-shadow: 3px 5px 8px black;
-      font-size: 28px;
+      font-size: 1.8rem;
       font-weight: bold;
       font-style: oblique;
       font-family: "Bruno Ace SC", cursive;
@@ -37,22 +40,25 @@
   }
 
   .container-form {
+    width: 60%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 20px;
+    padding: 20px 20px 0;
+    
 
-    .form-contactMe {
+    .form-contactMe { 
+      width: 100%;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       justify-content: center;
       gap: 20px;
-      padding: 20px 20px 0;
 
       input {
         background-color: transparent;
-        width: 500px;
+        width: 90%;
         height: 40px;
         padding: 0 15px;
         border-radius: 8px;
@@ -72,7 +78,7 @@
 
       textarea {
         background-color: transparent;
-        width: 500px;
+        width: 90%;
         height: 80px;
         padding: 15px;
         border-radius: 8px;
@@ -92,7 +98,7 @@
         background-color: transparent;
         border: 2px solid #2b97fa;
         box-shadow: 0px 5px 8px black;
-        width: 250px;
+        width: 60%;
         height: 40px;
         margin: 20px 0;
         border-radius: 8px;

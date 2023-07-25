@@ -1,7 +1,628 @@
-// @media (min-width: 1025px) {}
+@media (min-width: 1025px) {
+  .container-contactMe {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    background-color: transparent;
+    box-shadow: 0 0 15px black;
+    border-radius: 15px;
+    margin: 50px 0;
+    padding: 50px;
+    overflow: hidden;
+    width: 70vw;
+    height: 100%;
 
-// @media (min-width: 800px) and (max-width: 1024px) {}
+    .container-title {
+      width: 20% !important;
+      padding: 0 0 5px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
 
-// @media (max-width: 799px) {}
+      img {
+        width: 190px !important;
+      }
 
-// @media (max-width: 480px) {}
+      .title {
+        margin: 0;
+        text-align: center;
+        text-shadow: 3px 5px 8px black;
+        font-size: 1.8rem;
+        font-weight: bold;
+        font-style: oblique;
+        font-family: "Bruno Ace SC", cursive;
+        writing-mode: vertical-rl;
+        text-orientation: upright;
+        white-space: nowrap;
+      }
+    }
+
+    .container-form {
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px 20px 0;
+
+      .form-contactMe {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 20px;
+
+        input {
+          background-color: transparent;
+          width: 90%;
+          max-width: 500px;
+          height: 40px;
+          padding: 0 15px;
+          border-radius: 8px;
+          border: none;
+          box-shadow: 0 0 8px 2px black;
+          font-family: "Bruno Ace SC", cursive;
+          transition: all 0.2s ease-out;
+        }
+
+        input:focus {
+          transform: scale(1.02);
+          outline: 2px solid #2b97fa;
+          box-shadow: 3px 5px 15px black;
+        }
+
+        textarea {
+          background-color: transparent;
+          width: 90%;
+          height: 80px;
+          max-width: 700px;
+          padding: 15px;
+          border-radius: 8px;
+          border: none;
+          box-shadow: 0 0 8px 2px black;
+          font-family: "Bruno Ace SC", cursive;
+          transition: all 0.2s ease-out;
+        }
+
+        textarea:focus {
+          transform: scale(1.02);
+          outline: 2px solid #2b97fa;
+          box-shadow: 3px 5px 15px black;
+        }
+
+        .btn-submit {
+          background-color: transparent;
+          border: 2px solid #2b97fa;
+          box-shadow: 0px 5px 8px black;
+          width: 60%;
+          max-width: 600px;
+          height: 40px;
+          margin: 20px 0;
+          border-radius: 8px;
+          font-family: "Bruno Ace SC", cursive;
+          color: white;
+          font-weight: bold;
+          font-size: 17px;
+          cursor: pointer;
+          transition: all 0.2s ease-out;
+        }
+
+        .btn-submit:hover {
+          transform: scale(1.05);
+          box-shadow: 3px 5px 15px black;
+        }
+      }
+
+      .container-socials {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        padding: 0 20px;
+
+        a {
+          background-color: #2b97fa;
+          width: 60px;
+          height: 60px;
+          display: flex;
+          flex-direction: column-reverse;
+          align-items: center;
+          justify-content: center;
+          border: none;
+          border-radius: 50px;
+          box-shadow: 0 0 10px black;
+          padding: 0px;
+          transition: all 0.2s ease-out;
+
+          p {
+            color: #2b97fa;
+            font-family: "Bruno Ace SC", cursive;
+            margin: 5px 0 0;
+            font-size: 12px;
+          }
+
+          img {
+            width: 50px;
+          }
+        }
+
+        a:hover {
+          transform: scale(1.1);
+          box-shadow: 3px 5px 15px black;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 800px) and (max-width: 1024px) {
+  .container-contactMe {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px !important;
+    background-color: transparent;
+    box-shadow: 0 0 15px black;
+    border-radius: 15px;
+    margin: 50px 0;
+    padding: 40px !important;
+    overflow: hidden;
+    width: 70vw;
+    height: 100%;
+
+    .container-title {
+      width: 30% !important;
+      padding: 0 0 5px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      img {
+        width: 150px !important;
+      }
+
+      .title {
+        margin: 0;
+        text-align: center;
+        text-shadow: 3px 5px 8px black;
+        font-size: 1.6rem !important;
+        font-weight: bold;
+        font-style: oblique;
+        font-family: "Bruno Ace SC", cursive;
+        writing-mode: vertical-rl;
+        text-orientation: upright;
+        white-space: nowrap;
+      }
+    }
+
+    .container-form {
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px 0px 0 !important;
+
+      .form-contactMe {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 20px;
+
+        input {
+          background-color: transparent;
+          width: 90%;
+          max-width: 500px;
+          height: 40px;
+          padding: 0 15px;
+          border-radius: 8px;
+          border: none;
+          box-shadow: 0 0 8px 2px black;
+          font-family: "Bruno Ace SC", cursive;
+          transition: all 0.2s ease-out;
+        }
+
+        input:focus {
+          transform: scale(1.02);
+          outline: 2px solid #2b97fa;
+          box-shadow: 3px 5px 15px black;
+        }
+
+        textarea {
+          background-color: transparent;
+          width: 90%;
+          height: 80px;
+          max-width: 700px;
+          padding: 15px;
+          border-radius: 8px;
+          border: none;
+          box-shadow: 0 0 8px 2px black;
+          font-family: "Bruno Ace SC", cursive;
+          transition: all 0.2s ease-out;
+        }
+
+        textarea:focus {
+          transform: scale(1.02);
+          outline: 2px solid #2b97fa;
+          box-shadow: 3px 5px 15px black;
+        }
+
+        .btn-submit {
+          background-color: transparent;
+          border: 2px solid #2b97fa;
+          box-shadow: 0px 5px 8px black;
+          width: 60%;
+          max-width: 600px;
+          height: 40px;
+          margin: 20px 0;
+          border-radius: 8px;
+          font-family: "Bruno Ace SC", cursive;
+          color: white;
+          font-weight: bold;
+          font-size: 17px;
+          cursor: pointer;
+          transition: all 0.2s ease-out;
+        }
+
+        .btn-submit:hover {
+          transform: scale(1.05);
+          box-shadow: 3px 5px 15px black;
+        }
+      }
+
+      .container-socials {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        padding: 0 20px;
+
+        a {
+          background-color: #2b97fa;
+          width: 60px;
+          height: 60px;
+          display: flex;
+          flex-direction: column-reverse;
+          align-items: center;
+          justify-content: center;
+          border: none;
+          border-radius: 50px;
+          box-shadow: 0 0 10px black;
+          padding: 0px;
+          transition: all 0.2s ease-out;
+
+          p {
+            color: #2b97fa;
+            font-family: "Bruno Ace SC", cursive;
+            margin: 5px 0 0;
+            font-size: 12px;
+          }
+
+          img {
+            width: 50px;
+          }
+        }
+
+        a:hover {
+          transform: scale(1.1);
+          box-shadow: 3px 5px 15px black;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 799px) {
+  .container-contactMe {
+    display: flex;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    gap: 30px !important;
+    background-color: transparent;
+    box-shadow: 0 0 15px black;
+    border-radius: 15px;
+    margin: 50px 0;
+    padding: 40px !important;
+    overflow: hidden;
+    width: 70vw;
+    height: 100%;
+
+    .container-title {
+      width: 10% !important;
+      padding: 0 0 5px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      img {
+        display: none;
+        width: 0px !important;
+      }
+
+      .title {
+        padding: 20px 0px 0 !important;
+        margin: 0;
+        text-align: center;
+        text-shadow: 3px 5px 8px black;
+        font-size: 1.8rem !important;
+        font-weight: bold;
+        font-style: oblique;
+        font-family: "Bruno Ace SC", cursive;
+        writing-mode: vertical-rl;
+        text-orientation: upright;
+        white-space: nowrap;
+      }
+    }
+
+    .container-form {
+      width: 80% !important;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px 0px 0 !important;
+
+      .form-contactMe {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 30px !important;
+
+        input {
+          background-color: transparent;
+          width: 90%;
+          max-width: 500px;
+          height: 45px !important;
+          padding: 0 15px;
+          border-radius: 8px;
+          border: none;
+          font-size: 20px;
+          box-shadow: 0 0 8px 2px black;
+          font-family: "Bruno Ace SC", cursive;
+          transition: all 0.2s ease-out;
+        }
+
+        input:focus {
+          transform: scale(1.02);
+          outline: 2px solid #2b97fa;
+          box-shadow: 3px 5px 15px black;
+        }
+
+        textarea {
+          background-color: transparent;
+          width: 90%;
+          height: 80px;
+          max-width: 700px;
+          padding: 15px;
+          border-radius: 8px;
+          border: none;
+          box-shadow: 0 0 8px 2px black;
+          font-size: 20px;
+          font-family: "Bruno Ace SC", cursive;
+          transition: all 0.2s ease-out;
+        }
+
+        textarea:focus {
+          transform: scale(1.02);
+          outline: 2px solid #2b97fa;
+          box-shadow: 3px 5px 15px black;
+        }
+
+        .btn-submit {
+          background-color: transparent;
+          border: 2px solid #2b97fa;
+          box-shadow: 0px 5px 8px black;
+          width: 100% !important;
+          max-width: 600px;
+          height: 45px !important;
+          margin: 20px 0;
+          border-radius: 8px;
+          font-family: "Bruno Ace SC", cursive;
+          color: white;
+          font-weight: bold;
+          font-size: 20px !important;
+          cursor: pointer;
+          transition: all 0.2s ease-out;
+        }
+
+        .btn-submit:hover {
+          transform: scale(1.05);
+          box-shadow: 3px 5px 15px black;
+        }
+      }
+
+      .container-socials {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        padding: 0 20px;
+
+        a {
+          background-color: #2b97fa;
+          width: 70px !important;
+          height: 70px !important;
+          display: flex;
+          flex-direction: column-reverse;
+          align-items: center;
+          justify-content: center;
+          border: none;
+          border-radius: 50px;
+          box-shadow: 0 0 10px black;
+          padding: 0px;
+          transition: all 0.2s ease-out;
+
+          img {
+            width: 60px !important;
+          }
+        }
+
+        a:hover {
+          transform: scale(1.1);
+          box-shadow: 3px 5px 15px black;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .container-contactMe {
+    display: flex;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    gap: 20px !important;
+    background-color: transparent;
+    box-shadow: 0 0 15px black;
+    border-radius: 15px;
+    margin: 0px 0 !important;
+    padding: 30px !important;
+    overflow: hidden;
+    width: 70vw;
+    height: 100%;
+
+    .container-title {
+      width: 10% !important;
+      padding: 0 0 5px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start !important;
+
+      img {
+        display: none;
+        width: 0px !important;
+      }
+
+      .title {
+        padding: 20px 0px 0 !important;
+        margin: 0;
+        text-shadow: 3px 5px 8px black;
+        font-size: 1.6rem !important;
+        font-weight: bold;
+        font-style: oblique;
+        font-family: "Bruno Ace SC", cursive;
+        writing-mode: vertical-rl;
+        text-orientation: upright;
+        white-space: nowrap;
+      }
+    }
+
+    .container-form {
+      width: 80% !important;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px 0px 0 !important;
+
+      .form-contactMe {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 30px !important;
+
+        input {
+          background-color: transparent;
+          width: 90%;
+          max-width: 500px;
+          height: 45px !important;
+          padding: 0 15px;
+          border-radius: 8px;
+          border: none;
+          font-size: 20px;
+          box-shadow: 0 0 8px 2px black;
+          font-family: "Bruno Ace SC", cursive;
+          transition: all 0.2s ease-out;
+        }
+
+        input:focus {
+          transform: scale(1.02);
+          outline: 2px solid #2b97fa;
+          box-shadow: 3px 5px 15px black;
+        }
+
+        textarea {
+          background-color: transparent;
+          width: 90%;
+          height: 80px;
+          max-width: 700px;
+          padding: 15px;
+          border-radius: 8px;
+          border: none;
+          box-shadow: 0 0 8px 2px black;
+          font-size: 20px;
+          font-family: "Bruno Ace SC", cursive;
+          transition: all 0.2s ease-out;
+        }
+
+        textarea:focus {
+          transform: scale(1.02);
+          outline: 2px solid #2b97fa;
+          box-shadow: 3px 5px 15px black;
+        }
+
+        .btn-submit {
+          background-color: transparent;
+          border: 2px solid #2b97fa;
+          box-shadow: 0px 5px 8px black;
+          width: 100% !important;
+          max-width: 600px;
+          height: 45px !important;
+          margin: 20px 0;
+          border-radius: 8px;
+          font-family: "Bruno Ace SC", cursive;
+          color: white;
+          font-weight: bold;
+          font-size: 14px !important;
+          cursor: pointer;
+          transition: all 0.2s ease-out;
+        }
+
+        .btn-submit:hover {
+          transform: scale(1.05);
+          box-shadow: 3px 5px 15px black;
+        }
+      }
+
+      .container-socials {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px !important;
+        padding: 0px !important;
+
+        a {
+          background-color: #2b97fa;
+          width: 70px !important;
+          height: 70px !important;
+          display: flex;
+          flex-direction: column-reverse;
+          align-items: center;
+          justify-content: center;
+          border: none;
+          border-radius: 50px;
+          box-shadow: 0 0 10px black;
+          padding: 0px;
+          transition: all 0.2s ease-out;
+
+          img {
+            width: 60px !important;
+          }
+        }
+
+        a:hover {
+          transform: scale(1.1);
+          box-shadow: 3px 5px 15px black;
+        }
+      }
+    }
+  }
+}
