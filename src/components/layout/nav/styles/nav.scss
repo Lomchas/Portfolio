@@ -24,13 +24,13 @@
     gap: 15px;
     transition: all 0.5s ease-in-out;
 
-      img {
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.349);
-        width: 100px;
-        height: 100px;
-        border-radius: 50px;
-        transition: all 0.5s ease-in-out;
-      }
+    img {
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.349);
+      width: 100px;
+      height: 100px;
+      border-radius: 50px;
+      transition: all 0.5s ease-in-out;
+    }
 
     .info {
       display: flex;
@@ -47,11 +47,15 @@
       }
 
       @keyframes typing {
-        from {width: 0;}
+        from {
+          width: 0;
+        }
       }
 
       @keyframes blink {
-        50% {border-color: transparent;}
+        50% {
+          border-color: transparent;
+        }
       }
 
       .position {
@@ -64,7 +68,8 @@
         font-weight: bold;
         margin: 0;
         overflow: hidden;
-        animation: typing 4s steps(20) infinite alternate, blink .5s infinite step-end alternate;
+        animation: typing 4s steps(20) infinite alternate,
+          blink 0.5s infinite step-end alternate;
         transition: all 0.5s ease-in-out;
       }
     }
@@ -103,7 +108,7 @@
         position: relative;
       }
 
-      .active{
+      .active {
         color: white;
         transform: scale(1);
         box-shadow: 0px 5px 25px #2b96facb;
@@ -117,6 +122,83 @@
         transition: all 0.3s;
       }
     }
+  }
+
+  .second-menu-options {
+    transform: translateX(1000px);
+    visibility: hidden;
+    opacity: 0;
+    width: 25%;
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: start;
+    background-color: #1d1d1d;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    z-index: 10000;
+    box-shadow: 0px 0px 8px 100vmax rgba(0, 0, 0, 0.596);
+    transition: all .5s ease-in-out;
+
+    .btn-close-second-menu {
+      width: 40px;
+      height: 40px;
+      font-size: 24px;
+      background-color: transparent;
+      border: none;
+      text-shadow: 0px 2px 8px #2b96fa;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .btn-close-second-menu:hover {
+      transform: scale(1.1);
+    }
+
+    ol {
+      width: 100%;
+      padding: 0;
+      margin: 80px 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+      justify-content: center;
+      gap: 30px;
+
+      a {
+        color: rgba(255, 255, 255, 0.486);
+        font-family: "Bruno Ace SC", cursive;
+        border-bottom: 1px solid #2b96facb;
+        width: 90%;
+        height: 50px;
+        padding: 0 10px 0 0;
+        font-size: 20px;
+        text-align: end;
+        transition: all .3s ease-in;
+      }
+
+      a:hover{
+        box-shadow: 0 0 10px 2px #2b96fa;
+        border: none;
+        border-radius: 10px;
+      }
+
+      .active {
+        color: white;
+        box-shadow: 0 0 10px 2px #2b96fa;
+        border: none;
+        border-radius: 10px;
+      }
+    }
+  }
+
+  .open {
+    visibility: visible;
+    transform: translateX(0);
+    opacity: 1;
   }
 
   .container-button-bar {
@@ -191,6 +273,83 @@
     transform: translateY(-120px);
     position: absolute;
     right: 0;
+  }
+
+  .second-menu-options {
+    transform: translateX(1000px);
+    visibility: hidden;
+    opacity: 0;
+    width: 25%;
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: start;
+    background-color: #1d1d1d;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    z-index: 10000;
+    box-shadow: 0px 0px 8px 100vmax rgba(0, 0, 0, 0.596);
+    transition: all .5s ease-in-out;
+
+    .btn-close-second-menu {
+      width: 40px;
+      height: 40px;
+      font-size: 24px;
+      background-color: transparent;
+      border: none;
+      text-shadow: 0px 2px 8px #2b96fa;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .btn-close-second-menu:hover {
+      transform: scale(1.1);
+    }
+
+    ol {
+      width: 100%;
+      padding: 0;
+      margin: 80px 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+      justify-content: center;
+      gap: 30px;
+
+      a {
+        color: rgba(255, 255, 255, 0.486);
+        font-family: "Bruno Ace SC", cursive;
+        border-bottom: 1px solid #2b96facb;
+        width: 90%;
+        height: 50px;
+        padding: 0 10px 0 0;
+        font-size: 20px;
+        text-align: end;
+        transition: all .3s ease-in;
+      }
+
+      a:hover{
+        box-shadow: 0 0 10px 2px #2b96fa;
+        border: none;
+        border-radius: 10px;
+      }
+
+      .active {
+        color: white;
+        box-shadow: 0 0 10px 2px #2b96fa;
+        border: none;
+        border-radius: 10px;
+      }
+    }
+  }
+
+  .open {
+    visibility: visible;
+    transform: translateX(0);
+    opacity: 1;
   }
 
   .container-button-bar {
