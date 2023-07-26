@@ -8,7 +8,7 @@
     </div>
     <hr />
     <div class="wrapper-cv">
-      <embed zoom="90" class="cv" src="/src/assets/docs/cv.pdf" type="application/pdf" />
+      <embed zoom="90" class="cv" src="/assets/docs/cv.pdf" type="application/pdf" />
     </div>
   </div>
 </template>
