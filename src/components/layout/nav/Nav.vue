@@ -33,19 +33,19 @@
         X
       </button>
       <ol>
-        <router-link class="led-effect" :to="{ path: '/', exact: true }"
+        <router-link @click="toggleSecondMenu()" class="led-effect" :to="{ path: '/', exact: true }"
           >Home</router-link
         >
-        <router-link class="led-effect" :to="{ path: '/about-me', exact: true }"
+        <router-link @click="toggleSecondMenu()" class="led-effect" :to="{ path: '/about-me', exact: true }"
           >About-Me</router-link
         >
-        <router-link class="led-effect" :to="{ path: '/cv', exact: true }"
+        <router-link @click="toggleSecondMenu()" class="led-effect" :to="{ path: '/cv', exact: true }"
           >CV</router-link
         >
-        <router-link class="led-effect" :to="{ path: '/web-portfolio', exact: true }"
+        <router-link @click="toggleSecondMenu()" class="led-effect" :to="{ path: '/web-portfolio', exact: true }"
           >Web-Portfolio</router-link
         >
-        <router-link class="led-effect" :to="{ path: '/contact-me', exact: true }"
+        <router-link @click="toggleSecondMenu()" class="led-effect" :to="{ path: '/contact-me', exact: true }"
           >Contact-Me</router-link
         >
       </ol>
