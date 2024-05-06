@@ -4,7 +4,7 @@
 
 > 👨‍💻 Welcome to my Fullstack Portfolio! Explore my skills, projects, and more.
 
-![Portfolio Banner](path/to/banner-image.png)
+![Portfolio Banner](https://github.com/Lomchas/Portfolio/assets/89220592/e9258bee-6505-4693-adf5-8d4d6e017686)
 
 ## 📖 Table of Contents
 - [About](#about)
