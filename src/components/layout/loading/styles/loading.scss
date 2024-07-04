@@ -1,0 +1,23 @@
+@import './loading@media.scss';
+
+
+.container-loading{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+    width: 100%;
+    gap: 20px;
+    font-family: "Bruno Ace SC", cursive;
+    font-size: 32px;
+    letter-spacing: 5px;
+
+
+    span{
+        font-size: 12px;
+        max-width: 50%;
+        text-align: center;
+        letter-spacing: 5px;
+    }
+}

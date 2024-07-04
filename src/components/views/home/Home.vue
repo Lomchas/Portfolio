@@ -10,10 +10,10 @@
         <div class="skill" v-for="(area, i) in areaName" :key="i">
           <h2 class="title">{{area}} skills</h2>
           <hr width="100%">
-          <div  class="container-skill-item">
+          <div class="container-skill-item">
             <!-- <button class="scroll-button prev">◄</button> -->
             <div class="skills-wrapper">
-              <div class="skill-item" v-for="l in languages[area]">
+              <div class="skill-item" v-for="(l,index) in languages[area]" :key="index">
                 <img width="40" :src="l.img" alt="logo" />
                 <span>{{ l.name }}</span>
                 <Progress :percentProgress="l.percent" :colorProgress="l.color" />
@@ -57,7 +57,7 @@ export default {
         },
         {
           name: "SCSS",
-          img: "https://sass-lang.com/assets/img/styleguide/seal-color-aef0354c.png",
+          img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Sass_Logo_Color.svg/512px-Sass_Logo_Color.svg.png",
           percent: 70,
           color: "#CA6496",
         },
@@ -85,7 +85,7 @@ export default {
         },
         {
           name: "Express",
-          img: "https://camo.githubusercontent.com/9270fc40ed052b4158b76122cc9984c9c9670b717577d3e89497629fc25782e7/68747470733a2f2f75706c6f61642e77696b696d656469612e6f72672f77696b6970656469612f636f6d6d6f6e732f7468756d622f382f38382f5374617475735f6975636e5f45585f69636f6e2e7376672f34383070782d5374617475735f6975636e5f45585f69636f6e2e7376672e706e67",
+          img: "https://images.credly.com/size/340x340/images/1c2c86e1-16ce-4e4d-a425-d1ac96bb026d/express.png",
           percent: 76,
           color: "#868D94",
         },
