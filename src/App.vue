@@ -9,7 +9,6 @@
 
 <script>
 import Footer from "./components/layout/footer/Footer.vue";
-import loading from "./components/layout/loading/loading.vue";
 import Nav from "./components/layout/nav/Nav.vue";
 import { getAboutMeInformation } from "./controllers/getAboutMeInformation";
 import { getHomeInformation } from "./controllers/getHomeInformation";
@@ -17,12 +16,13 @@ import { getProjectsInformation } from "./controllers/getProjectsInformation";
 import { onMounted, ref } from "vue";
 import { RouterView } from "vue-router";
 import { useState } from "./utils/globalState";
+import Loading from "./components/layout/loading/Loading.vue";
 
 export default {
   name: "App",
   components: {
     Footer,
-    loading,
+    Loading,
     Nav,
     RouterView,
   },
