@@ -8,9 +8,9 @@
     </div>
     <hr />
     <div class="wrapper-cv">
-      <embed zoom="90" class="cv" src="https://drive.google.com/file/d/1gTnDNGrq9WKTh8bzN4PHSRLb_dzJ2wWz/preview" type="application/pdf" />
+      <embed zoom="90" class="cv" src="https://drive.google.com/file/d/1JrgENjJKH6ouVq4I1mDJ3YtRH1hzPZ9s/preview" type="application/pdf" />
     </div>
-    <a class="download-btn" href="https://drive.google.com/file/d/1gTnDNGrq9WKTh8bzN4PHSRLb_dzJ2wWz/view" target="_blank"> Download it here!</a>
+    <a class="download-btn" href="https://drive.google.com/file/d/1JrgENjJKH6ouVq4I1mDJ3YtRH1hzPZ9s/view" target="_blank"> Download it here!</a>
   </div>
 </template>
 
