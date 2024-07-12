@@ -2,7 +2,7 @@
   <div class="container-contactMe">
     <div class="container-title">
       <img :src="illustration4" alt="Illustration4" />
-      <h2 class="title">Contact | me</h2>
+      <h2 class="title">Contact me</h2>
     </div>
     <div class="container-form">
       <form @submit.prevent="onSubmit()" class="form-contactMe" autocomplete="off">
@@ -12,10 +12,10 @@
         <button class="btn-submit" type="submit">Send message!</button>
       </form>
       <div class="container-socials">
-        <a href="https://wa.me/+573225227473" target="_blank">
+        <a :href="`https://wa.me/${state.aboutMe[0]?.phone}`" target="_blank">
           <img :src="iconWpp" alt="Whatsapp">
         </a>
-        <a href="https://mail.google.com/mail/?view=cm&to=daniellosada17@gmail.com" target="_blank">
+        <a :href="`https://mail.google.com/mail/?view=cm&to=${state.aboutMe[0]?.email}`" target="_blank">
           <img :src="iconGml" alt="Gmail">
         </a>
       </div>
@@ -27,11 +27,16 @@
 import illustration4 from '../../../assets/illustrations/illustration4.png'
 import iconWpp from '../../../assets/icons/socials/iconWpp.png'
 import iconGml from '../../../assets/icons/socials/iconGmail.png'
+import { useState } from '../../../utils/globalState';
 
 export default {
   setup() {
     const onSubmit = () => {};
+
+    const state = useState();
+
     return {
+      state,
       illustration4,
       iconWpp,
       iconGml,

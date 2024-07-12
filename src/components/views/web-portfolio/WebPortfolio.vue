@@ -11,7 +11,7 @@
     <hr />
     <div class="container-projects">
       <div class="wrapper-projects">
-        <div class="project" v-if="type_frontend" v-for="(project, i) in projects.frontend_projects" :key="i">
+        <div class="project" v-show="type_frontend" v-for="(project, i) in state.projects[0]?.frontend_projects" :key="i">
           <div class="info">
             <h3 class="name">{{ project.name }}</h3>
             <p class="desc">{{ project.description }}</p>
@@ -24,7 +24,7 @@
             <img :src="project.img" alt="project-img" />
           </div>
         </div>
-        <div class="project" v-else-if="!type_frontend" v-for="(project, i2) in projects.backend_projects" :key="i2">
+        <div class="project" v-show="!type_frontend" v-for="(project, i2) in state.projects[0]?.backend_projects" :key="i2">
           <div class="info">
             <h3 class="name">{{ project.name }}</h3>
             <p class="desc">{{ project.description }}</p>
@@ -43,61 +43,15 @@
 </template>
 
 <script>
-import { reactive, ref } from "vue";
 import illustration3 from '../../../assets/illustrations/illustration3.png'
+import { ref } from "vue";
+import { useState } from "../../../utils/globalState";
 
 export default {
   setup() {
-    const type_frontend = ref(false);
-    const projects = reactive({
-      frontend_projects: [
-        {
-          name: "E Commerce App",
-          description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum magni, laboriosam ex dicta saepe architecto nemo modi! Pariatur quae dicta et saepe nesciunt corrupti nihil ullam, sapiente dolore tenetur veniam hic error minus? Odio voluptatibus sed  mollitia ratione, similique facilis officiis eveniet, quisquam doloribus rerum temporibus delectus magnam cumque autem!",
-          url_repository: "https://co.pinterest.com/pin/662169951482244622/",
-          url_deploy: "https://co.pinterest.com/pin/662169951482244622/",
-          img:
-            "https://img.freepik.com/psd-gratis/portada-facebook-marketing-digital-plantilla-banner-web_237398-409.jpg",
-        },
-        {
-          name: "E Commerce App",
-          description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum magni, laboriosam ex dicta saepe architecto nemo modi! Pariatur quae dicta et saepe nesciunt corrupti nihil ullam, sapiente dolore tenetur veniam hic error minus? Odio voluptatibus sed  mollitia ratione, similique facilis officiis eveniet, quisquam doloribus rerum temporibus delectus magnam cumque autem!",
-          url_repository: "https://co.pinterest.com/pin/662169951482244622/",
-          url_deploy: "https://co.pinterest.com/pin/662169951482244622/",
-          img:
-            "https://img.freepik.com/psd-gratis/portada-facebook-marketing-digital-plantilla-banner-web_237398-409.jpg",
-        },
-        {
-          name: "E Commerce App",
-          description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum magni, laboriosam ex dicta saepe architecto nemo modi! Pariatur quae dicta et saepe nesciunt corrupti nihil ullam, sapiente dolore tenetur veniam hic error minus? Odio voluptatibus sed  mollitia ratione, similique facilis officiis eveniet, quisquam doloribus rerum temporibus delectus magnam cumque autem!",
-          url_repository: "https://co.pinterest.com/pin/662169951482244622/",
-          url_deploy: "https://co.pinterest.com/pin/662169951482244622/",
-          img:
-            "https://img.freepik.com/psd-gratis/portada-facebook-marketing-digital-plantilla-banner-web_237398-409.jpg",
-        },
-        // {
-        //   name: "",
-        //   description: "",
-        //   url_repository: "",
-        //   url_deploy: "",
-        //   img: "",
-        // },
-      ],
-      backend_projects: [
-        {
-          name: "E Commerce App",
-          description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum magni, laboriosam ex dicta saepe architecto nemo modi! Pariatur quae dicta et saepe nesciunt corrupti nihil ullam, sapiente dolore tenetur veniam hic error minus? Odio voluptatibus sed  mollitia ratione, similique facilis officiis eveniet, quisquam doloribus rerum temporibus delectus magnam cumque autem!",
-          url_repository: "https://co.pinterest.com/pin/662169951482244622/",
-          url_deploy: "https://co.pinterest.com/pin/662169951482244622/",
-          img:
-            "https://img.freepik.com/psd-gratis/portada-facebook-marketing-digital-plantilla-banner-web_237398-409.jpg",
-        },
-      ],
-    });
+    const type_frontend = ref(true);
+    const state = useState();
+
 
     const change_type = (isFrontend) => {
       if(isFrontend && type_frontend){
@@ -115,7 +69,7 @@ export default {
     }
 
     return {
-      projects,
+      state,
       type_frontend,
       change_type,
       illustration3,

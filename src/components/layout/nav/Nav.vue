@@ -3,8 +3,8 @@
     <div class="container-mainIfo">
       <a href="https://www.linkedin.com/in/daniel-losada-194673186/" target="_blank">
         <div class="info">
-          <h1 class="name">Daniel Losada</h1>
-          <p class="position">¡Full-Stack Developer!</p>
+          <h1 class="name">{{ state.aboutMe[0]?.name }}</h1>
+          <p class="position">{{ state.aboutMe[0]?.position }}</p>
         </div>
       </a>
     </div>
@@ -63,6 +63,7 @@ import { RouterLink } from "vue-router";
 import barsIcon from "../../../assets/icons/nav/bars-icon-menu.png";
 import profileImg from "../../../assets/profile.png";
 import { onBeforeUnmount, onMounted, ref } from "vue";
+import { useState } from "../../../utils/globalState";
 
 export default {
   name: "Nav",
@@ -70,6 +71,8 @@ export default {
 
   setup(props) {
     const isOpen = ref(false);
+
+    const state = useState();
 
     const toggleSecondMenu = () => {
       isOpen.value = !isOpen.value;
@@ -99,6 +102,7 @@ export default {
       profileImg,
       isOpen,
       toggleSecondMenu,
+      state,
     };
   },
 };
