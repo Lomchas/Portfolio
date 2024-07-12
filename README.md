@@ -4,7 +4,7 @@
 
 > 👨‍💻 Welcome to my Fullstack Portfolio! Explore my skills, projects, and more.
 
-![Portfolio Banner](https://github.com/Lomchas/Portfolio/assets/89220592/e9258bee-6505-4693-adf5-8d4d6e017686)
+![Portfolio Banner](https://github.com/user-attachments/assets/3a9af769-7ec0-4a6d-bb4e-d8014622be8e)
 
 ## 📖 Table of Contents
 - [About](#about)
@@ -47,7 +47,7 @@ Feel free to reach out to me for collaboration or any inquiries:
 
 - Email: **daniellosada17@gmail.com**
 - LinkedIn: [Daniel Losada](https://www.linkedin.com/in/daniel-losada17/)
-- Website: [www.yourwebsite.com](https://www.yourwebsite.com)
+- Website: [Deploy-Link](https://portfolio-daniellosada.vercel.app/)
 
 ---
 
@@ -61,7 +61,8 @@ Thank you for visiting my Fullstack Portfolio!
 
 > 👨‍💻 ¡Bienvenido/a a mi Portafolio Fullstack! Explora mis habilidades, proyectos y más.
 
-![Banner del Portafolio](ruta/a/imagen-de-banner.png)
+![Banner del Portafolio](https://github.com/user-attachments/assets/4c70a701-1ffe-498d-aee5-faa89f14f58e)
+
 
 ## 📖 Tabla de Contenidos
 - [Acerca de mí](#acerca-de-mí)
@@ -105,7 +106,7 @@ No dudes en contactarme para colaboraciones o cualquier consulta:
 
 - Email: **daniellosada17@gmail.com**
 - LinkedIn: [Daniel Losada](https://www.linkedin.com/in/daniel-losada17/)
-- Sitio web: [www.tusitio.com](https://www.tusitio.com)
+- Sitio web: [Deploy-Link](https://portfolio-daniellosada.vercel.app/)
 
 ---
 
