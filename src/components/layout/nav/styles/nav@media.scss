@@ -1,3 +1,27 @@
+@media (min-width: 1200px){ 
+  .smallNav {
+    .container-mainIfo {
+      img {
+      }
+
+      .info {
+        .name {
+          font-size: calc(14px + 1vw) !important;
+        }
+        .position {
+          font-size: calc(14px + .5vw) !important;
+        }
+      }
+    }
+    .container-button-bar{ 
+      .btn-bar{
+        transform: scale(1.4);
+      }
+    
+    }
+  }
+}
+
 @media screen and (max-width: 1200px) {
   .container-nav {
     width: 100vw;
