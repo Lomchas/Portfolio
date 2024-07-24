@@ -1,7 +1,7 @@
 @import './home@media.scss';
 
 .container-home {
-  width: 100%;
+  width: calc(100vw - 17px);
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -9,13 +9,13 @@
   .container-greeting {
     padding: 0px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: flex-start;
     gap: 20px;
     overflow: hidden;
 
     .container-illustration {
-      height: 70%;
+      height: 70%;  
       display: flex;
       justify-content: center;
       background-image: url("/src/assets/bg-picture.svg");
