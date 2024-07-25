@@ -7,7 +7,7 @@ export const getAboutMeInformation = async (route, state) => {
      }
      catch(err){
          state.error = `An error has occurred: ${err}`;
-         console.log(err);
+         console.log(state.error);
      }
      finally{
         state.loading = false;

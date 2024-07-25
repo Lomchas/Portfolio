@@ -8,6 +8,7 @@
         error: null,
         loading: true,
         areaName: [],
+        contactMe: {}
     });
 
 
