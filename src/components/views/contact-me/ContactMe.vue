@@ -4,10 +4,16 @@
       <img :src="illustration4" alt="Illustration4" />
       <h2 class="title">Contact me</h2>
     </div>
-    <img src="https://i.gifer.com/ZKZg.gif" width="40" alt="Loading..." v-if="loadingForm"/>
+    <!-- Spinner externo: se muestra solo mientras se envía el formulario. -->
+    <img
+      src="https://i.gifer.com/ZKZg.gif"
+      width="40"
+      alt="Loading..."
+      v-if="loadingForm"
+    />
     <div class="container-form" v-else>
       <form
-        @submit.prevent="onSubmit()"
+        @submit.prevent="onSubmit"
         class="form-contactMe"
         autocomplete="off"
       >
@@ -16,30 +22,32 @@
           id="nameField"
           name="name"
           placeholder="Name"
-          v-model="form.name"
+          v-model.trim="form.name"
         />
         <input
           type="email"
           id="emailField"
           name="email"
           placeholder="Email"
-          v-model="form.email"
+          v-model.trim="form.email"
+          required
         />
         <textarea
           id="msgField"
           name="msg"
           placeholder="Message"
-          v-model="form.message"
+          v-model.trim="form.message"
         />
         <button class="btn-submit" type="submit">Send message!</button>
       </form>
       <div class="container-socials">
-        <a :href="`https://wa.me/${state.aboutMe[0]?.phone}`" target="_blank">
+        <a :href="`https://wa.me/${state.aboutMe[0]?.phone}`" target="_blank" rel="noopener noreferrer">
           <img :src="iconWpp" alt="Whatsapp" />
         </a>
         <a
           :href="`https://mail.google.com/mail/?view=cm&to=${state.aboutMe[0]?.email}`"
           target="_blank"
+          rel="noopener noreferrer"
         >
           <img :src="iconGml" alt="Gmail" />
         </a>
@@ -49,38 +57,68 @@
 </template>
 
 <script>
+/**
+ * ContactMe.vue
+ * ---------------------------------------------------------------
+ * Vista del formulario de contacto.
+ *
+ * Mejoras aplicadas:
+ *  - async/await coherente (antes mezclaba .then() dentro de una
+ *    función async, lo que ocultaba errores no manejados).
+ *  - Validación con trim() para ignorar espacios en blanco.
+ *  - v-model.trim limpia los inputs directamente en el binding.
+ *  - El reset del formulario se maneja aquí (responsabilidad de la
+ *    vista), no dentro del service.
+ *  - Se eliminó el import de Swal sin usar (el service lo maneja).
+ */
 import illustration4 from "../../../assets/illustrations/illustration4.png";
 import iconWpp from "../../../assets/icons/socials/iconWpp.png";
 import iconGml from "../../../assets/icons/socials/iconGmail.png";
+import { ref, reactive } from "vue";
 import { useState } from "../../../utils/globalState";
 import { postSendEmail } from "../../../controllers/postSendEmail";
-import Swal from "sweetalert2";
-import { ref } from "vue";
 
 export default {
+  name: "ContactMe",
+
   setup() {
-    const form = ref({
+    /** Datos del formulario (reactive: no necesita .value en el template). */
+    const form = reactive({
       name: "",
       email: "",
       message: "",
     });
 
-    const loadingForm = ref(false)
+    /** Estado de envío del formulario (spinner). */
+    const loadingForm = ref(false);
 
     const state = useState();
 
+    /**
+     * Valida y envía el formulario de contacto.
+     */
     const onSubmit = async () => {
-      loadingForm.value = true
-      if (form.value.name.length == 0 || form.value.email.length == 0 || form.value.message.length == 0) {
-        Swal.fire("There are some blank fields!");
-        loadingForm.value = false
-      } else {
-        state.contactMe = { ...form.value };
-        postSendEmail("sendEmail", state, form).then(() => {
-          loadingForm.value = false
-        })
-        
+      // Validación: rechaza campos vacíos o con solo espacios.
+      const isEmpty = [form.name, form.email, form.message]
+        .some((field) => field.trim().length === 0);
+
+      if (isEmpty) {
+        import("sweetalert2").then(({ default: Swal }) =>
+          Swal.fire("There are some blank fields!")
+        );
+        return;
       }
+
+      loadingForm.value = true;
+      state.contactMe = { ...form };
+
+      const success = await postSendEmail("sendEmail", state);
+
+      if (success) {
+        // Reset del formulario tras un envío exitoso.
+        Object.assign(form, { name: "", email: "", message: "" });
+      }
+      loadingForm.value = false;
     };
 
     return {

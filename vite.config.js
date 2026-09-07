@@ -1,11 +1,26 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import sass from 'vite-plugin-sass'
+/**
+ * vite.config.js
+ * ---------------------------------------------------------------
+ * Configuración de Vite para el build de producción.
+ *
+ * Optimizaciones aplicadas:
+ *  - target es2019: transpila a JS moderno pero compatible,
+ *    generando bundles más pequeños que el default de Vite 4.
+ *  - chunkSizeWarningLimit: umbral de aviso por chunk.
+ *  - assetsInlineLimit: los assets pequeños (<8kB) se embeben como
+ *    data-URI, reduciendo peticiones HTTP.
+ */
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import sass from "vite-plugin-sass";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    vue(),
-    sass()
-  ],
-})
+  plugins: [vue(), sass()],
+  build: {
+    target: "es2019",
+    chunkSizeWarningLimit: 300,
+    assetsInlineLimit: 8192,
+  },
+});
+

@@ -1,5 +1,5 @@
 <template>
-  <div class="container-loading">
+  <div class="container-loading" role="status" aria-live="polite">
     <img src="../../../assets/icons/Loading/loading.svg" alt="Loading..." />
     Loading...
     <span
@@ -10,7 +10,16 @@
 </template>
 
 <script>
-export default {};
+/**
+ * Loading.vue
+ * ---------------------------------------------------------------
+ * Componente de carga (spinner) mostrado mientras la API responde.
+ * role="status" + aria-live permiten a lectores de pantalla anunciar
+ * el estado de carga (accesibilidad).
+ */
+export default {
+  name: "Loading",
+};
 </script>
 
 <style lang="sass" scoped>

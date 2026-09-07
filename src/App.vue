@@ -1,55 +1,77 @@
 <template>
   <div class="main-container">
-    <Nav :smallNavbar="isSmall" />
-    <loading v-show="state.loading" />
+    <Nav :small-navbar="isSmall" />
+    <!-- v-if desmonta el spinner del DOM cuando no se necesita
+         (libera nodos/memoria en vez de solo ocultarlo). -->
+    <Loading v-if="state.loading" />
     <RouterView />
     <Footer />
   </div>
 </template>
 
 <script>
+/**
+ * App.vue
+ * ---------------------------------------------------------------
+ * Componente raíz: orquesta el layout (Nav, Loading, vistas, Footer)
+ * y realiza la carga inicial de datos de la API.
+ *
+ * Mejoras aplicadas:
+ *  - Las 3 peticiones iniciales ahora se ejecutan EN PARALELO con
+ *    Promise.all (antes eran secuenciales, triplicando el tiempo de
+ *    espera del usuario).
+ *  - El listener de scroll se registra con { passive: true } (no
+ *    bloquea el hilo principal al hacer scroll) y se limpia en
+ *    onBeforeUnmount (evita memory leaks).
+ *  - Se eliminaron imports/exports que no se usaban en el template.
+ */
 import Footer from "./components/layout/footer/Footer.vue";
 import Nav from "./components/layout/nav/Nav.vue";
-import { getAboutMeInformation } from "./controllers/getAboutMeInformation";
-import { getHomeInformation } from "./controllers/getHomeInformation";
-import { getProjectsInformation } from "./controllers/getProjectsInformation";
-import { onMounted, ref } from "vue";
-import { RouterView } from "vue-router";
-import { useState } from "./utils/globalState";
 import Loading from "./components/layout/loading/Loading.vue";
+import { RouterView } from "vue-router";
+import { onBeforeUnmount, onMounted, ref } from "vue";
+import { useState } from "./utils/globalState";
+import {
+  getAboutMeInformation,
+  getHomeInformation,
+  getProjectsInformation,
+} from "./controllers/getAboutMeInformation";
 
 export default {
   name: "App",
-  components: {
-    Footer,
-    Loading,
-    Nav,
-    RouterView,
-  },
-  setup(props) {
+  components: { Footer, Loading, Nav, RouterView },
+
+  setup() {
+    /** Indica si la página está desplazada (nav compacto). */
     const isSmall = ref(false);
     const state = useState();
 
-    onMounted(async () => {
-      // API request!
-      await getHomeInformation("/experiences", state);
+    /** Referencia a la función manejadora para poder desregistrarla. */
+    const handleScroll = () => {
+      isSmall.value = window.scrollY > 20;
+    };
 
-      await getAboutMeInformation("/aboutMe", state);
+    onMounted(() => {
+      // Peticiones en paralelo: reduce el tiempo de carga inicial
+      // de ~3x RTT a 1x RTT respecto a la versión secuencial.
+      // Cada service desactiva `loading` al terminar.
+      Promise.all([
+        getHomeInformation("/experiences", state),
+        getAboutMeInformation("/aboutMe", state),
+        getProjectsInformation("/projects", state),
+      ]).catch((err) => console.error("Initial data load failed:", err));
 
-      await getProjectsInformation("/projects", state)
-
-    // Restarting scroll on each page!
-      window.addEventListener("scroll", () => {
-        isSmall.value = window.scrollY > 20;
-      });
+      // passive: true permite al navegador hacer scroll sin esperar.
+      window.addEventListener("scroll", handleScroll, { passive: true });
     });
 
-    return {
-      isSmall,
-      state,
-      getHomeInformation,
-      getAboutMeInformation,
-    };
+    // Limpieza del listener: sin esto quedaría registrado aunque el
+    // componente se destruyera (memory leak típico en SPA).
+    onBeforeUnmount(() => {
+      window.removeEventListener("scroll", handleScroll);
+    });
+
+    return { isSmall, state };
   },
 };
 </script>
