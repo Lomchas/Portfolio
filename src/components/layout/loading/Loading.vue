@@ -9,19 +9,19 @@
   </div>
 </template>
 
-<script>
+<script setup>
 /**
  * Loading.vue
  * ---------------------------------------------------------------
  * Componente de carga (spinner) mostrado mientras la API responde.
  * role="status" + aria-live permiten a lectores de pantalla anunciar
  * el estado de carga (accesibilidad).
+ *
+ * Migrado a <script setup> (componente sin lógica: solo el template
+ * y sus estilos).
  */
-export default {
-  name: "Loading",
-};
 </script>
 
 <style lang="sass" scoped>
-@import './styles/loading.scss'
+@use './styles/loading.scss' as *
 </style>

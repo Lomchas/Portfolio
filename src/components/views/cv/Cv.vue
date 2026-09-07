@@ -27,39 +27,28 @@
   </div>
 </template>
 
-<script>
+<script setup>
 /**
  * Cv.vue
  * ---------------------------------------------------------------
  * Vista que embebe y permite descargar el CV (Google Drive).
  *
- * Mejoras aplicadas:
- *  - Las URLs del archivo están centralizadas en constantes (evita
- *    repetir el ID del archivo en dos sitios distintos).
- *  - rel="noopener noreferrer" en el enlace de descarga.
+ * Migrado a <script setup>. Las URLs del archivo derivan de una
+ * única constante `CV_FILE_ID` (sin repetir el ID en dos sitios).
  */
 
 /** ID del archivo del CV en Google Drive. */
 const CV_FILE_ID = "1JrgENjJKH6ouVq4I1mDJ3YtRH1hzPZ9s";
 
-export default {
-  name: "Cv",
+const illustration2 = new URL(
+  "../../../assets/illustrations/illustration2.png",
+  import.meta.url
+).href;
 
-  setup() {
-    const illustration2 = new URL(
-      "../../../assets/illustrations/illustration2.png",
-      import.meta.url
-    ).href;
-
-    return {
-      illustration2,
-      cvPreviewUrl: `https://drive.google.com/file/d/${CV_FILE_ID}/preview`,
-      cvDownloadUrl: `https://drive.google.com/file/d/${CV_FILE_ID}/view`,
-    };
-  },
-};
+const cvPreviewUrl = `https://drive.google.com/file/d/${CV_FILE_ID}/preview`;
+const cvDownloadUrl = `https://drive.google.com/file/d/${CV_FILE_ID}/view`;
 </script>
 
 <style lang="sass">
-@import './styles/cv.scss'
+@use './styles/cv.scss' as *
 </style>

@@ -17,32 +17,22 @@
   </div>
 </template>
 
-<script>
+<script setup>
 /**
  * AboutMe.vue
  * ---------------------------------------------------------------
  * Vista con la descripción personal y accesos a contacto/CV.
  *
- * Mejoras aplicadas:
- *  - RouterLink importado explícitamente (mejor tree-shaking).
- *  - loading="lazy" en la ilustración.
+ * Migrado a <script setup>. RouterLink importado explícitamente
+ * (mejor tree-shaking) y loading="lazy" en la ilustración.
  */
 import illustration1 from "../../../assets/illustrations/illustration1.png";
 import { RouterLink } from "vue-router";
 import { useState } from "../../../utils/globalState";
 
-export default {
-  name: "AboutMe",
-  components: { RouterLink },
-
-  setup() {
-    const state = useState();
-
-    return { illustration1, state };
-  },
-};
+const state = useState();
 </script>
 
 <style lang="sass">
-@import './styles/aboutMe.scss'
+@use './styles/aboutMe.scss' as *
 </style>

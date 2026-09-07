@@ -35,35 +35,22 @@
   </div>
 </template>
 
-<script>
+<script setup>
 /**
  * Home.vue
  * ---------------------------------------------------------------
  * Vista principal: muestra el perfil y las skills organizadas por
  * áreas con barras de progreso.
  *
- * Mejoras aplicadas:
- *  - key por nombre del lenguaje (más estable que el índice: evita
- *    re-renders innecesarios al cambiar el orden de la lista).
- *  - loading="lazy" en los logos de skills (difiere la carga de
- *    imágenes fuera del viewport).
- *  - Uso de kebab-case en props (convención de Vue).
+ * Migrado a <script setup>. keys estables por nombre (no índice) y
+ * loading="lazy" en los logos (difieren imágenes fuera de viewport).
  */
 import Progress from "../../layout/progress-bar/Progress.vue";
 import { useState } from "../../../utils/globalState.js";
 
-export default {
-  name: "Home",
-  components: { Progress },
-
-  setup() {
-    const state = useState();
-
-    return { state };
-  },
-};
+const state = useState();
 </script>
 
 <style lang="sass">
-@import './styles/home.scss'
+@use './styles/home.scss' as *
 </style>

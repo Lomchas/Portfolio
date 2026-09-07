@@ -1,4 +1,5 @@
-@import './cv@media.scss';
+// Modernización Sass: @use sustituye a @import (deprecado).
+@use './cv@media.scss' as *;
 
 .container-cv {
   width: 90vw;

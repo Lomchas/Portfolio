@@ -1,4 +1,5 @@
-@import './home@media.scss';
+// Modernización Sass: @use sustituye a @import (deprecado).
+@use './home@media.scss' as *;
 
 .container-home {
   width: calc(100vw - 17px);

@@ -1,4 +1,5 @@
-@import "./nav@media.scss";
+// Modernización Sass: @use sustituye a @import (deprecado).
+@use "./nav@media.scss" as *;
 
 .container-nav {
   position: fixed;

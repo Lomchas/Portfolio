@@ -1,4 +1,5 @@
-@import './aboutMe@media.scss';
+// Modernización Sass: @use sustituye a @import (deprecado).
+@use './aboutMe@media.scss' as *;
 
 .container-aboutMe {
   width: 100%;

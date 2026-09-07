@@ -47,19 +47,15 @@
   </div>
 </template>
 
-<script>
+<script setup>
 /**
  * WebPortfolio.vue
  * ---------------------------------------------------------------
  * Vista del listado de proyectos con filtro por tipo.
  *
- * Mejoras aplicadas:
- *  - Los botones de filtro se generan con v-for desde la constante
- *    `projectTypes` (elimina HTML repetido y facilita añadir tipos).
- *  - `projectsToShow` usa un mapa en lugar de un switch (más limpio
- *    y extensible).
- *  - key por nombre de proyecto (estabilidad del DOM en el v-for).
- *  - rel="noopener noreferrer" en enlaces externos.
+ * Migrado a <script setup>. Los botones de filtro se generan con
+ * v-for desde la constante `projectTypes` y `projectsToShow` se
+ * deriva con un computed dinámico (extensible a nuevos tipos).
  */
 import illustration3 from "../../../assets/illustrations/illustration3.png";
 import { computed, ref } from "vue";
@@ -68,40 +64,25 @@ import { useState } from "../../../utils/globalState";
 /** Tipos de proyecto disponibles (coinciden con las claves de la API). */
 const projectTypes = ["frontend", "backend", "mobile"];
 
-export default {
-  name: "WebPortfolio",
+const state = useState();
 
-  setup() {
-    const state = useState();
+/** Tipo de proyecto seleccionado actualmente. */
+const currentProjectType = ref("frontend");
 
-    /** Tipo de proyecto seleccionado actualmente. */
-    const currentProjectType = ref("frontend");
-
-    const changeType = (type) => {
-      currentProjectType.value = type;
-    };
-
-    /**
-     * Proyectos filtrados según el tipo seleccionado.
-     * El fallback `?? []` evita errores si la API aún no respondió.
-     */
-    const projectsToShow = computed(() => {
-      const grouped = state.projects[0] ?? {};
-      return grouped[`${currentProjectType.value}_projects`] ?? [];
-    });
-
-    return {
-      state,
-      currentProjectType,
-      changeType,
-      illustration3,
-      projectTypes,
-      projectsToShow,
-    };
-  },
+const changeType = (type) => {
+  currentProjectType.value = type;
 };
+
+/**
+ * Proyectos filtrados según el tipo seleccionado.
+ * El fallback `?? []` evita errores si la API aún no respondió.
+ */
+const projectsToShow = computed(() => {
+  const grouped = state.projects[0] ?? {};
+  return grouped[`${currentProjectType.value}_projects`] ?? [];
+});
 </script>
 
 <style lang="sass">
-@import './styles/webPortfolio.scss'
+@use './styles/webPortfolio.scss' as *
 </style>

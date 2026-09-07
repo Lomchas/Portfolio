@@ -1,4 +1,5 @@
-@import './webPortfolio@media.scss';
+// Modernización Sass: @use sustituye a @import (deprecado).
+@use './webPortfolio@media.scss' as *;
 
 .container-webPortfolio{
     width: 95vw;

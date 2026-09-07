@@ -1,4 +1,5 @@
-@import './contactMe@media.scss';
+// Modernización Sass: @use sustituye a @import (deprecado).
+@use './contactMe@media.scss' as *;
 
 .container-contactMe {
   max-width: 1300px;

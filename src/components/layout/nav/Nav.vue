@@ -47,25 +47,29 @@
   </div>
 </template>
 
-<script>
+<script setup>
 /**
  * Nav.vue
  * ---------------------------------------------------------------
  * Barra de navegación con versión compacta al hacer scroll y menú
  * desplegable para móvil.
  *
- * Mejoras aplicadas:
- *  - Los enlaces se renderizan con v-for desde una constante
- *    `menuLinks` (elimina duplicación entre menú desktop y móvil).
- *  - Enlaces con rel="noopener noreferrer" (seguridad).
- *  - Listener de scroll con { passive: true } y limpieza correcta.
- *  - Se eliminaron importaciones sin uso (profileImg, RouterLink).
- *  - Corregido el bug `window.screenY` (typo de `scrollY`).
+ * Migrado a <script setup>: defineProps declara los props con tipo
+ * y los expone directamente al template; los bindings de nivel
+ * superior (isOpen, menuLinks...) están disponibles sin `return`.
+ *
+ * El listener de scroll usa { passive: true } y se limpia al
+ * desmontar el componente (sin memory leaks).
  */
 import barsIcon from "../../../assets/icons/nav/bars-icon-menu.png";
 import { onBeforeUnmount, onMounted, ref } from "vue";
 import { RouterLink } from "vue-router";
 import { useState } from "../../../utils/globalState";
+
+/** Props: true cuando la página está desplazada > 20px (nav compacto). */
+defineProps({
+  smallNavbar: { type: Boolean, default: false },
+});
 
 /** Definición única de las secciones del menú. */
 const menuLinks = [
@@ -76,40 +80,28 @@ const menuLinks = [
   { path: "/contact-me", label: "Contact-Me" },
 ];
 
-export default {
-  name: "Nav",
-  components: { RouterLink },
-  props: {
-    /** True cuando la página está desplazada > 20px (nav compacto). */
-    smallNavbar: { type: Boolean, default: false },
-  },
+/** Estado del menú móvil (abierto/cerrado). */
+const isOpen = ref(false);
 
-  setup() {
-    /** Estado del menú móvil (abierto/cerrado). */
-    const isOpen = ref(false);
-    const state = useState();
+const state = useState();
 
-    const openMenu = () => { isOpen.value = true; };
-    const closeMenu = () => { isOpen.value = false; };
+const openMenu = () => { isOpen.value = true; };
+const closeMenu = () => { isOpen.value = false; };
 
-    /** Cierra el menú móvil cuando el usuario vuelve arriba. */
-    const handleScroll = () => {
-      if (window.scrollY < 20) isOpen.value = false;
-    };
-
-    onMounted(() => {
-      window.addEventListener("scroll", handleScroll, { passive: true });
-    });
-
-    onBeforeUnmount(() => {
-      window.removeEventListener("scroll", handleScroll);
-    });
-
-    return { barsIcon, isOpen, openMenu, closeMenu, menuLinks, state };
-  },
+/** Cierra el menú móvil cuando el usuario vuelve arriba. */
+const handleScroll = () => {
+  if (window.scrollY < 20) isOpen.value = false;
 };
+
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll, { passive: true });
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
 </script>
 
 <style lang="sass">
-@import './styles/nav.scss'
+@use './styles/nav.scss' as *
 </style>

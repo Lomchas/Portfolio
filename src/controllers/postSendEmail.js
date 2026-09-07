@@ -8,8 +8,9 @@
  *  - `finally` restaura `state.loading` para no dejar la UI bloqueada.
  *  - El estado del formulario lo resetea el componente (responsabilidad
  *    de la vista), el service solo comunica con la API.
+ *  - sweetalert2 se importa dinámicamente: no viaja en el bundle
+ *    inicial, se descarga solo cuando se muestra un diálogo.
  */
-import Swal from "sweetalert2";
 import axiosInstance from "../plugins/axios";
 
 /** Configuración visual compartida de los diálogos SweetAlert. */
@@ -18,6 +19,12 @@ const swalTheme = {
   color: "#f0f0f0",
   confirmButtonColor: "#3085d6",
 };
+
+/**
+ * Carga perezosa de SweetAlert2 (code-splitting).
+ * @returns {Promise<typeof import('sweetalert2').default>}
+ */
+const loadSwal = () => import("sweetalert2").then((m) => m.default);
 
 /**
  * Envía el mensaje de contacto al backend.
@@ -29,6 +36,7 @@ export const postSendEmail = async (route, state) => {
   try {
     const { data } = await axiosInstance.post(route, state?.contactMe);
 
+    const Swal = await loadSwal();
     Swal.fire({
       ...swalTheme,
       title: "Perfect",
@@ -42,6 +50,7 @@ export const postSendEmail = async (route, state) => {
     state.error = `An error has occurred, Email was not sent: ${err}`;
     console.error(state.error);
 
+    const Swal = await loadSwal();
     Swal.fire({
       ...swalTheme,
       title: "Oops...",

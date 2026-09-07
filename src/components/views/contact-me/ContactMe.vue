@@ -56,20 +56,15 @@
   </div>
 </template>
 
-<script>
+<script setup>
 /**
  * ContactMe.vue
  * ---------------------------------------------------------------
  * Vista del formulario de contacto.
  *
- * Mejoras aplicadas:
- *  - async/await coherente (antes mezclaba .then() dentro de una
- *    función async, lo que ocultaba errores no manejados).
- *  - Validación con trim() para ignorar espacios en blanco.
- *  - v-model.trim limpia los inputs directamente en el binding.
- *  - El reset del formulario se maneja aquí (responsabilidad de la
- *    vista), no dentro del service.
- *  - Se eliminó el import de Swal sin usar (el service lo maneja).
+ * Migrado a <script setup>. async/await coherente, validación con
+ * trim() y reset del formulario gestionado por la vista (el service
+ * solo comunica con la API y muestra los diálogos).
  */
 import illustration4 from "../../../assets/illustrations/illustration4.png";
 import iconWpp from "../../../assets/icons/socials/iconWpp.png";
@@ -78,62 +73,46 @@ import { ref, reactive } from "vue";
 import { useState } from "../../../utils/globalState";
 import { postSendEmail } from "../../../controllers/postSendEmail";
 
-export default {
-  name: "ContactMe",
+/** Datos del formulario (reactive: no necesita .value en el template). */
+const form = reactive({
+  name: "",
+  email: "",
+  message: "",
+});
 
-  setup() {
-    /** Datos del formulario (reactive: no necesita .value en el template). */
-    const form = reactive({
-      name: "",
-      email: "",
-      message: "",
-    });
+/** Estado de envío del formulario (spinner). */
+const loadingForm = ref(false);
 
-    /** Estado de envío del formulario (spinner). */
-    const loadingForm = ref(false);
+const state = useState();
 
-    const state = useState();
+/**
+ * Valida y envía el formulario de contacto.
+ */
+const onSubmit = async () => {
+  // Validación: rechaza campos vacíos o con solo espacios.
+  const isEmpty = [form.name, form.email, form.message]
+    .some((field) => field.trim().length === 0);
 
-    /**
-     * Valida y envía el formulario de contacto.
-     */
-    const onSubmit = async () => {
-      // Validación: rechaza campos vacíos o con solo espacios.
-      const isEmpty = [form.name, form.email, form.message]
-        .some((field) => field.trim().length === 0);
+  if (isEmpty) {
+    // Import dinámico: sweetalert2 solo se descarga cuando se usa.
+    const Swal = (await import("sweetalert2")).default;
+    Swal.fire("There are some blank fields!");
+    return;
+  }
 
-      if (isEmpty) {
-        import("sweetalert2").then(({ default: Swal }) =>
-          Swal.fire("There are some blank fields!")
-        );
-        return;
-      }
+  loadingForm.value = true;
+  state.contactMe = { ...form };
 
-      loadingForm.value = true;
-      state.contactMe = { ...form };
+  const success = await postSendEmail("sendEmail", state);
 
-      const success = await postSendEmail("sendEmail", state);
-
-      if (success) {
-        // Reset del formulario tras un envío exitoso.
-        Object.assign(form, { name: "", email: "", message: "" });
-      }
-      loadingForm.value = false;
-    };
-
-    return {
-      loadingForm,
-      form,
-      state,
-      illustration4,
-      iconWpp,
-      iconGml,
-      onSubmit,
-    };
-  },
+  if (success) {
+    // Reset del formulario tras un envío exitoso.
+    Object.assign(form, { name: "", email: "", message: "" });
+  }
+  loadingForm.value = false;
 };
 </script>
 
 <style lang="sass">
-@import './styles/contactMe.scss'
+@use './styles/contactMe.scss' as *
 </style>

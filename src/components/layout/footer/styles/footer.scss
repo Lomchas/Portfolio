@@ -1,3 +1,7 @@
+// Modernización Sass: @use sustituye a @import (deprecado).
+// Nota: @use debe ir siempre al inicio del archivo.
+@use "./footer@media.scss" as *;
+
 .container-footer {
     margin: 300px 0 0 0;
     padding: 20px;
@@ -51,4 +55,4 @@
 }
 
 
-@import "./footer@media.scss";
+

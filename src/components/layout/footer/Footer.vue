@@ -32,16 +32,15 @@
   </footer>
 </template>
 
-<script>
+<script setup>
 /**
  * Footer.vue
  * ---------------------------------------------------------------
  * Pie de página con información de contacto y redes sociales.
  *
- * Mejoras aplicadas:
- *  - Enlaces sociales generados con v-for (menos HTML duplicado).
- *  - rel="noopener noreferrer" en enlaces externos (seguridad).
- *  - loading="lazy" en los iconos (no bloquean el render inicial).
+ * Migrado a <script setup>. Los enlaces sociales se derivan de los
+ * datos de la API con `computed` (no se recalculan si los datos no
+ * cambian) y se renderizan con v-for.
  */
 import iconGitH from "../../../assets/icons/socials/iconGitH.png";
 import iconLinkedin from "../../../assets/icons/socials/iconLinkedin.png";
@@ -49,27 +48,19 @@ import iconWpp from "../../../assets/icons/socials/iconWpp.png";
 import { computed } from "vue";
 import { useState } from "../../../utils/globalState";
 
-export default {
-  name: "Footer",
+const state = useState();
 
-  setup() {
-    const state = useState();
-
-    /**
-     * Enlaces sociales derivados de los datos de la API.
-     * `computed` evita recalcular si los datos no cambian.
-     */
-    const socialLinks = computed(() => [
-      { href: state.aboutMe[0]?.github, icon: iconGitH, alt: "GitHub" },
-      { href: state.aboutMe[0]?.linkedin, icon: iconLinkedin, alt: "LinkedIn" },
-      { href: `https://wa.me/${state.aboutMe[0]?.phone}`, icon: iconWpp, alt: "WhatsApp" },
-    ]);
-
-    return { state, socialLinks };
-  },
-};
+/**
+ * Enlaces sociales derivados de los datos de la API.
+ * `computed` evita recalcular si los datos no cambian.
+ */
+const socialLinks = computed(() => [
+  { href: state.aboutMe[0]?.github, icon: iconGitH, alt: "GitHub" },
+  { href: state.aboutMe[0]?.linkedin, icon: iconLinkedin, alt: "LinkedIn" },
+  { href: `https://wa.me/${state.aboutMe[0]?.phone}`, icon: iconWpp, alt: "WhatsApp" },
+]);
 </script>
 
 <style lang="sass">
-@import "./styles/footer.scss"
+@use "./styles/footer.scss" as *
 </style>
