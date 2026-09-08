@@ -17,7 +17,7 @@
           class="led-effect"
           :to="{ path: link.path }"
         >
-          {{ link.label }}
+          {{ t(link.key) }}
         </RouterLink>
       </ol>
     </nav>
@@ -35,12 +35,44 @@
           :to="{ path: link.path }"
           @click="closeMenu()"
         >
-          {{ link.label }}
+          {{ t(link.key) }}
         </RouterLink>
       </ol>
     </nav>
-    <!-- Botón de tema + menú móvil: siempre visibles, sin overlaps. -->
+    <!-- Botón de tema + idioma + menú móvil: siempre visibles. -->
     <div class="container-button-bar">
+      <!-- Selector de idioma (ES default, EN, PT, ZH). -->
+      <div class="lang-selector" ref="langSelectorRef">
+        <button
+          class="lang-btn"
+          type="button"
+          aria-label="Change language"
+          :title="currentLanguage.label"
+          @click="langOpen = !langOpen"
+        >
+          <svg class="lang-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+          </svg>
+          <span class="lang-code">{{ locale.toUpperCase() }}</span>
+        </button>
+        <Transition name="lang-drop">
+          <ul class="lang-menu" v-if="langOpen">
+            <li v-for="lang in languages" :key="lang.code">
+              <button
+                type="button"
+                :class="{ current: lang.code === locale }"
+                @click="selectLanguage(lang.code)"
+              >
+                <span class="flag">{{ lang.flag }}</span>
+                <span>{{ lang.label }}</span>
+                <span class="check" v-if="lang.code === locale">✔</span>
+              </button>
+            </li>
+          </ul>
+        </Transition>
+      </div>
+
       <button
         class="theme-toggle"
         type="button"
@@ -78,24 +110,25 @@
  * desmontar el componente (sin memory leaks).
  */
 import barsIcon from "../../../assets/icons/nav/bars-icon-menu.png";
-import { onBeforeUnmount, onMounted, ref } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import { RouterLink } from "vue-router";
 import { useState } from "../../../utils/globalState";
 import { useTheme } from "../../../composables/useTheme";
+import { useI18n } from "../../../composables/useI18n";
 
 /** Props: true cuando la página está desplazada > 20px (nav compacto). */
 defineProps({
   smallNavbar: { type: Boolean, default: false },
 });
 
-/** Definición única de las secciones del menú. */
+/** Definición única de las secciones del menú (traducidas con i18n). */
 const menuLinks = [
-  { path: "/", label: "Home" },
-  { path: "/about-me", label: "About-Me" },
-  { path: "/cv", label: "CV" },
-  { path: "/web-portfolio", label: "Web-Portfolio" },
-  { path: "/ai-integrations", label: "AI" },
-  { path: "/contact-me", label: "Contact-Me" },
+  { path: "/", key: "nav.home" },
+  { path: "/about-me", key: "nav.about" },
+  { path: "/cv", key: "nav.cv" },
+  { path: "/web-portfolio", key: "nav.portfolio" },
+  { path: "/ai-integrations", key: "nav.ai" },
+  { path: "/contact-me", key: "nav.contact" },
 ];
 
 /** Estado del menú móvil (abierto/cerrado). */
@@ -105,6 +138,26 @@ const state = useState();
 
 /** Tema claro/oscuro (compartido globalmente, persiste en localStorage). */
 const { theme, toggleTheme } = useTheme();
+
+/** Idioma: ES (default), EN, PT, ZH. */
+const { t, locale, languages, setLocale } = useI18n();
+const langOpen = ref(false);
+const langSelectorRef = ref(null);
+const currentLanguage = computed(
+  () => languages.find((l) => l.code === locale.value) ?? languages[0]
+);
+
+const selectLanguage = (code) => {
+  setLocale(code);
+  langOpen.value = false;
+};
+
+/** Cierra el dropdown al hacer click fuera. */
+const onClickOutside = (event) => {
+  if (langSelectorRef.value && !langSelectorRef.value.contains(event.target)) {
+    langOpen.value = false;
+  }
+};
 
 const openMenu = () => { isOpen.value = true; };
 const closeMenu = () => { isOpen.value = false; };
@@ -116,10 +169,12 @@ const handleScroll = () => {
 
 onMounted(() => {
   window.addEventListener("scroll", handleScroll, { passive: true });
+  document.addEventListener("click", onClickOutside);
 });
 
 onBeforeUnmount(() => {
   window.removeEventListener("scroll", handleScroll);
+  document.removeEventListener("click", onClickOutside);
 });
 </script>
 

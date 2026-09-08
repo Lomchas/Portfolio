@@ -3,17 +3,14 @@
     <div class="contact-card">
       <!-- ---- Panel izquierdo: info de contacto directa ---- -->
       <aside class="contact-info" v-reveal>
-        <p class="eyebrow">— Contact me</p>
-        <h2 class="title">Let's build something together</h2>
-        <p class="lead">
-          Have a project, an idea or an automation in mind?
-          Tell me about it and I'll get back to you fast.
-        </p>
+        <p class="eyebrow">{{ t('contact.eyebrow') }}</p>
+        <h2 class="title">{{ t('contact.title') }}</h2>
+        <p class="lead">{{ t('contact.lead') }}</p>
 
         <!-- Estado de disponibilidad (innovador para reclutadores) -->
         <div class="availability">
           <span class="pulse-dot" aria-hidden="true"></span>
-          Available for new projects
+          {{ t('contact.availability') }}
         </div>
 
         <!-- Filas de contacto con acción real -->
@@ -21,7 +18,7 @@
           <li>
             <span class="row-icon">📧</span>
             <div class="row-body">
-              <span class="row-label">Email</span>
+              <span class="row-label">{{ t('contact.email') }}</span>
               <a
                 class="row-value"
                 :href="`https://mail.google.com/mail/?view=cm&to=${state.aboutMe[0]?.email}`"
@@ -32,7 +29,7 @@
             <button
               class="copy-btn"
               type="button"
-              :title="copied ? 'Copied!' : 'Copy email'"
+              :title="copied ? t('contact.copied') : t('contact.copyEmail')"
               @click="copyEmail"
             >
               {{ copied ? "✔" : "⧉" }}
@@ -41,7 +38,7 @@
           <li>
             <span class="row-icon">💬</span>
             <div class="row-body">
-              <span class="row-label">WhatsApp</span>
+              <span class="row-label">{{ t('contact.whatsapp') }}</span>
               <a
                 class="row-value"
                 :href="`https://wa.me/${state.aboutMe[0]?.phone}`"
@@ -53,7 +50,7 @@
           <li>
             <span class="row-icon">💼</span>
             <div class="row-body">
-              <span class="row-label">LinkedIn</span>
+              <span class="row-label">{{ t('contact.linkedin') }}</span>
               <a
                 class="row-value"
                 :href="state.aboutMe[0]?.linkedin"
@@ -65,7 +62,7 @@
           <li>
             <span class="row-icon">📍</span>
             <div class="row-body">
-              <span class="row-label">Location</span>
+              <span class="row-label">{{ t('contact.location') }}</span>
               <span class="row-value">{{ state.aboutMe[0]?.location }}</span>
             </div>
           </li>
@@ -87,7 +84,7 @@
         <!-- Spinner CSS propio (nada de GIFs externos). -->
         <div class="form-loading" v-if="loadingForm">
           <span class="spinner" aria-hidden="true"></span>
-          <p>Sending your message…</p>
+          <p>{{ t('contact.sendingText') }}</p>
         </div>
 
         <form
@@ -102,11 +99,11 @@
               id="nameField"
               name="name"
               type="text"
-              placeholder=" "
+              :placeholder="t('contact.messagePlaceholder')"
               v-model.trim="form.name"
               @blur="touched.name = true"
             />
-            <label for="nameField">Your name</label>
+            <label for="nameField">{{ t('contact.nameLabel') }}</label>
             <span class="field-error" v-if="touched.name && !fieldsValid.name">
               Please tell me your name
             </span>
@@ -122,9 +119,9 @@
               @blur="touched.email = true"
               required
             />
-            <label for="emailField">Your email</label>
+            <label for="emailField">{{ t('contact.emailLabel') }}</label>
             <span class="field-error" v-if="touched.email && !fieldsValid.email">
-              Enter a valid email
+              {{ t('contact.emailError') }}
             </span>
           </div>
 
@@ -138,14 +135,14 @@
               v-model.trim="form.message"
               @blur="touched.message = true"
             ></textarea>
-            <label for="msgField">Tell me about your project…</label>
+            <label for="msgField">{{ t('contact.messageLabel') }}</label>
             <span class="char-counter" :class="{ limit: form.message.length >= 550 }">
               {{ form.message.length }}/600
             </span>
           </div>
 
           <button class="btn-submit" type="submit" :disabled="loadingForm">
-            {{ loadingForm ? "Sending…" : "Send message 🚀" }}
+            {{ loadingForm ? t('contact.sendingButton') : t('contact.sendMessage') }}
           </button>
         </form>
       </section>
@@ -164,6 +161,7 @@
 import { ref, reactive, computed } from "vue";
 import { useState } from "../../../utils/globalState";
 import { postSendEmail } from "../../../controllers/postSendEmail";
+import { useI18n } from "../../../composables/useI18n";
 import illustration4 from "../../../assets/illustrations/illustration4.png";
 
 /** Datos del formulario (reactive: no necesita .value en el template). */
@@ -183,6 +181,7 @@ const loadingForm = ref(false);
 const copied = ref(false);
 
 const state = useState();
+const { t } = useI18n();
 
 /** Validaciones en vivo por campo. */
 const fieldsValid = computed(() => ({
@@ -218,7 +217,7 @@ const onSubmit = async () => {
 
   if (!fieldsValid.value.name || !fieldsValid.value.email || !fieldsValid.value.message) {
     const Swal = (await import("sweetalert2")).default;
-    Swal.fire("Please check the highlighted fields");
+    Swal.fire(t('contact.validationError'));
     return;
   }
 

@@ -60,8 +60,10 @@ import iconGitH from "../../../assets/icons/socials/iconGitH.png";
 import iconLinkedin from "../../../assets/icons/socials/iconLinkedin.png";
 import iconWpp from "../../../assets/icons/socials/iconWpp.png";
 import { computed } from "vue";
+import { useI18n } from "../../../composables/useI18n";
 import { useState } from "../../../utils/globalState";
 
+const { t } = useI18n();
 const state = useState();
 
 /**

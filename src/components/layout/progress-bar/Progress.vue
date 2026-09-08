@@ -25,6 +25,9 @@
  * honesta y más legible.
  */
 import { computed } from "vue";
+import { useI18n, levelKey } from "../../../composables/useI18n";
+
+const { t } = useI18n();
 
 const props = defineProps({
   percentProgress: {
@@ -42,15 +45,8 @@ const props = defineProps({
 /** Número de puntos rellenos (1-5) según el porcentaje. */
 const filledDots = computed(() => Math.max(1, Math.ceil(props.percentProgress / 20)));
 
-/** Etiqueta de nivel legible en lugar del número crudo. */
-const levelLabel = computed(() => {
-  const p = props.percentProgress;
-  if (p >= 90) return "Expert";
-  if (p >= 75) return "Advanced";
-  if (p >= 60) return "Proficient";
-  if (p >= 40) return "Intermediate";
-  return "Familiar";
-});
+/** Etiqueta de nivel legible (traducida con i18n). */
+const levelLabel = computed(() => t(levelKey(props.percentProgress)));
 </script>
 
 <style lang="sass">

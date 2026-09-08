@@ -1,7 +1,7 @@
 <template>
   <div class="container-loading" role="status" aria-live="polite">
     <img src="../../../assets/icons/Loading/loading.svg" alt="Loading..." />
-    Loading...
+    {{ t('loading.text') }}
     <span
       >Please wait a few seconds, I'm using a free hosting so i have to wait 50
       secs for the first request. Beforehand thanks a lot!</span
@@ -10,6 +10,8 @@
 </template>
 
 <script setup>
+import { useI18n } from "../../../composables/useI18n";
+const { t } = useI18n();
 /**
  * Loading.vue
  * ---------------------------------------------------------------

@@ -2,17 +2,16 @@
   <div class="container-ai">
     <!-- HERO -->
     <header class="ai-hero" v-reveal>
-      <p class="eyebrow">— AI Integrations</p>
-      <h2 class="title">Artificial Intelligence, applied for real</h2>
+      <p class="eyebrow">{{ t("ai.eyebrow") }}</p>
+      <h2 class="title">{{ t("ai.title") }}</h2>
       <p class="subtitle">
-        I connect AI to products, processes and people: from prompt
-        engineering to automations that save hours of work every week.
+        {{ t("ai.subtitle") }}
       </p>
       <div class="hero-badges">
-        <span class="badge">🧠 LLMs</span>
-        <span class="badge">🔌 APIs</span>
-        <span class="badge">⚙️ Automations</span>
-        <span class="badge">🎨 Generative content</span>
+        <span class="badge">{{ t("ai.badges.llms") }}</span>
+        <span class="badge">{{ t("ai.badges.apis") }}</span>
+        <span class="badge">{{ t("ai.badges.automations") }}</span>
+        <span class="badge">{{ t("ai.badges.content") }}</span>
       </div>
     </header>
 
@@ -20,31 +19,25 @@
     <div class="ai-grid">
       <article class="ai-card" v-reveal>
         <div class="card-icon">🧠</div>
-        <h3 class="card-title">AI Prompting</h3>
+        <h3 class="card-title">{{ t("ai.prompting.title") }}</h3>
         <p class="card-text">
-          Advanced prompt engineering: structured prompts, role/system design
-          and iterative refinement to get consistent, production-ready
-          outputs from LLMs (ChatGPT, Claude, Gemini).
+          {{ t("ai.prompting.text") }}
         </p>
       </article>
 
       <article class="ai-card" v-reveal="80">
         <div class="card-icon">🔌</div>
-        <h3 class="card-title">Apps & API Integrations</h3>
+        <h3 class="card-title">{{ t("ai.integrations.title") }}</h3>
         <p class="card-text">
-          I connect AI models to real products: REST APIs, webhooks,
-          databases and existing apps — adding chat, analysis and
-          generation features where they actually create value.
+          {{ t("ai.integrations.text") }}
         </p>
       </article>
 
       <article class="ai-card" v-reveal="160">
         <div class="card-icon">🎨</div>
-        <h3 class="card-title">Design & Illustrative Content</h3>
+        <h3 class="card-title">{{ t("ai.design.title") }}</h3>
         <p class="card-text">
-          Creation of illustrative and visual content with generative
-          tools: assets for web, presentations and branding, keeping a
-          coherent visual identity across the product.
+          {{ t("ai.design.text") }}
         </p>
       </article>
 
@@ -53,44 +46,30 @@
         <div class="automation-head">
           <div class="card-icon">⚙️</div>
           <div>
-            <h3 class="card-title">Automations & Time Savings</h3>
-            <p class="card-tagline">Less repetitive work, more production.</p>
+            <h3 class="card-title">{{ t("ai.automation.title") }}</h3>
+            <p class="card-tagline">{{ t("ai.automation.tagline") }}</p>
           </div>
           <span class="exp-badge" title="Real professional experience">
-            ✅ Proven experience · Renault Sofasa Colombia
+            {{ t("ai.automation.badge") }}
           </span>
         </div>
 
         <div class="automation-grid">
           <div class="automation-item">
-            <h4>Administrative & industrial processes</h4>
-            <p>
-              Automation of repetitive flows: reporting, document handling,
-              data entry and internal requests, combining AI with scripts
-              and integrations.
-            </p>
+            <h4>{{ t("ai.automation.item1Title") }}</h4>
+            <p>{{ t("ai.automation.item1Text") }}</p>
           </div>
           <div class="automation-item">
-            <h4>Production maximization</h4>
-            <p>
-              AI-assisted planning and monitoring to identify bottlenecks
-              and increase throughput in industrial environments.
-            </p>
+            <h4>{{ t("ai.automation.item2Title") }}</h4>
+            <p>{{ t("ai.automation.item2Text") }}</p>
           </div>
           <div class="automation-item">
-            <h4>Time & resource reduction</h4>
-            <p>
-              Measurable savings: fewer manual hours, fewer errors and
-              better use of existing tools before buying new ones.
-            </p>
+            <h4>{{ t("ai.automation.item3Title") }}</h4>
+            <p>{{ t("ai.automation.item3Text") }}</p>
           </div>
           <div class="automation-item">
-            <h4>Real-world impact</h4>
-            <p>
-              Applied in a manufacturing context at
-              <strong>Renault Sofasa Colombia</strong>, where automation
-              meets strict quality and traceability standards.
-            </p>
+            <h4>{{ t("ai.automation.item4Title") }}</h4>
+            <p>{{ t("ai.automation.item4Text") }}</p>
           </div>
         </div>
       </article>
@@ -98,8 +77,8 @@
 
     <!-- CTA -->
     <div class="ai-cta" v-reveal>
-      <p>Want to bring AI into your project or process?</p>
-      <RouterLink to="/contact-me" class="btn-primary">Let's talk 🚀</RouterLink>
+      <p>{{ t("ai.ctaText") }}</p>
+      <RouterLink to="/contact-me" class="btn-primary">{{ t("ai.ctaButton") }}</RouterLink>
     </div>
   </div>
 </template>
@@ -114,6 +93,9 @@
  * Reutiliza el lenguaje visual del portafolio (glass + tokens).
  */
 import { RouterLink } from "vue-router";
+import { useI18n } from "../../../composables/useI18n";
+
+const { t } = useI18n();
 </script>
 
 <style lang="scss">

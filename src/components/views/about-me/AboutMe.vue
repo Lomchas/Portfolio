@@ -8,7 +8,7 @@
           <span class="photo-ring" aria-hidden="true"></span>
         </div>
         <div class="about-heading">
-          <p class="eyebrow">— About Me</p>
+          <p class="eyebrow">{{ t("about.eyebrow") }}</p>
           <h2 class="title">{{ state.aboutMe[0]?.name }}</h2>
           <p class="role">
             {{ state.aboutMe[0]?.position }}
@@ -30,11 +30,11 @@
       <!-- GRID: descripción + tarjetas por área de skills -->
       <div class="about-grid">
         <article class="about-card card-bio" v-reveal>
-          <h3 class="card-title">Who am I? 🙋‍♂️</h3>
+          <h3 class="card-title">{{ t("about.whoAmI") }}</h3>
           <p class="info">{{ state.aboutMe[0]?.description }}</p>
           <div class="container-btns">
-            <RouterLink to="/contact-me" class="btn-primary">Hire Me! 🚀</RouterLink>
-            <RouterLink to="/cv" class="btn-ghost">Check out my CV 📄</RouterLink>
+            <RouterLink to="/contact-me" class="btn-primary">{{ t("about.hireMe") }}</RouterLink>
+            <RouterLink to="/cv" class="btn-ghost">{{ t("about.checkCv") }}</RouterLink>
           </div>
         </article>
 
@@ -49,7 +49,7 @@
           >
             <div class="area-head">
               <h3 class="card-title">{{ area }}</h3>
-              <span class="area-count">{{ skillCount(area) }} skills</span>
+              <span class="area-count">{{ t("about.skillsCount", { n: skillCount(area) }) }}</span>
             </div>
             <div class="area-icons">
               <span class="chip chip-sm" v-for="s in state.languages[area]" :key="s.name" :title="`${s.name} — ${levelLabel(s.percent)}`">
@@ -96,6 +96,9 @@ import { RouterLink } from "vue-router";
 import { computed } from "vue";
 import { useState } from "../../../utils/globalState";
 import { getSkillIcon } from "../../../utils/skillIcons.js";
+import { useI18n } from "../../../composables/useI18n";
+
+const { t, levelKey } = useI18n();
 
 const state = useState();
 
@@ -111,14 +114,8 @@ const totalSkills = computed(() => allSkills.value.length);
 /** Cantidad de skills de un área. */
 const skillCount = (area) => (state.languages[area] ?? []).length;
 
-/** Etiqueta de nivel coherente con la vista Home. */
-const levelLabel = (percent) => {
-  if (percent >= 90) return "Expert";
-  if (percent >= 75) return "Advanced";
-  if (percent >= 60) return "Proficient";
-  if (percent >= 40) return "Intermediate";
-  return "Familiar";
-};
+/** Etiqueta de nivel coherente con la vista Home (traducida). */
+const levelLabel = (percent) => t(levelKey(percent));
 
 const socialLinks = computed(() => [
   { href: state.aboutMe[0]?.github, icon: iconGitH, alt: "GitHub" },

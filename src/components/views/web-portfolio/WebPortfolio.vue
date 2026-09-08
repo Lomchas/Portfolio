@@ -2,7 +2,7 @@
   <div class="container-webPortfolio">
     <div class="container-title" v-reveal>
       <img :src="illustration3" alt="illustration3" loading="lazy" />
-      <h2 class="title">Portfolio</h2>
+      <h2 class="title">{{ t("projects.title") }}</h2>
       <!-- Filtro por tipo de proyecto, generado con v-for. -->
       <div class="nav-projects">
         <button
@@ -12,7 +12,7 @@
           class="btn-kindOfProject"
           @click="changeType(type)"
         >
-          {{ type.charAt(0).toUpperCase() + type.slice(1) }}
+          {{ t(`projects.${type}`) }}
         </button>
       </div>
     </div>
@@ -29,13 +29,13 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 class="btn-go go_repository"
-              >Open repository! 💻</a>
+              >{{ t("projects.openRepo") }}</a>
               <a
                 :href="project.url_deploy"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="btn-go go_deploy"
-              >{{ currentProjectType === 'mobile' ? 'Try app!📲' : 'Open deploy!🚀' }}</a>
+              >{{ currentProjectType === 'mobile' ? t("projects.tryApp") : t("projects.openDeploy") }}</a>
             </div>
           </div>
           <div class="wrapper-illustration">
@@ -60,6 +60,9 @@
 import illustration3 from "../../../assets/illustrations/illustration3.png";
 import { computed, ref } from "vue";
 import { useState } from "../../../utils/globalState";
+import { useI18n } from "../../../composables/useI18n";
+
+const { t } = useI18n();
 
 /** Tipos de proyecto disponibles (coinciden con las claves de la API). */
 const projectTypes = ["frontend", "backend", "mobile"];

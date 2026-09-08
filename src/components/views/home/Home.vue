@@ -3,12 +3,12 @@
     <!-- HERO: saludo + tarjeta de perfil con tilt 3D -->
     <section class="hero" v-reveal>
       <div class="hero-text">
-        <p class="hero-hi">👋 Hi there, I'm</p>
+        <p class="hero-hi">{{ t("home.hi") }}</p>
         <h1 class="hero-name">{{ state.aboutMe[0]?.name }}</h1>
         <p class="hero-role">{{ state.aboutMe[0]?.position }}</p>
         <div class="hero-cta">
-          <RouterLink to="/web-portfolio" class="btn-primary">View my work 🚀</RouterLink>
-          <RouterLink to="/contact-me" class="btn-ghost">Get in touch</RouterLink>
+          <RouterLink to="/web-portfolio" class="btn-primary">{{ t("home.viewWork") }}</RouterLink>
+          <RouterLink to="/contact-me" class="btn-ghost">{{ t("home.getInTouch") }}</RouterLink>
         </div>
       </div>
 
@@ -29,7 +29,7 @@
 
     <div class="container-skills">
       <div class="skill" v-for="(area, i) in state.areaName" :key="area" v-reveal="i * 80">
-        <h2 class="title">{{ area }} skills</h2>
+        <h2 class="title">{{ t("home.skillsArea", { area }) }}</h2>
         <hr width="100%" />
         <div class="container-skill-item">
           <div class="skills-wrapper">
@@ -65,6 +65,9 @@ import { RouterLink } from "vue-router";
 import { reactive, computed } from "vue";
 import { useState } from "../../../utils/globalState.js";
 import { getSkillIcon } from "../../../utils/skillIcons.js";
+import { useI18n } from "../../../composables/useI18n.js";
+
+const { t } = useI18n();
 
 const state = useState();
 

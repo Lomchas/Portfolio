@@ -17,11 +17,11 @@
       </div>
 
       <div class="cv-actions">
-        <button class="btn-ghost" type="button" @click="toggleFullscreen" :title="isFullscreen ? 'Exit fullscreen' : 'Fullscreen'">
-          {{ isFullscreen ? "⤡ Exit fullscreen" : "⛶ Fullscreen" }}
+        <button class="btn-ghost" type="button" @click="toggleFullscreen" :title="isFullscreen ? t('cv.exitFullscreen') : t('cv.fullscreen')">
+          {{ isFullscreen ? "⤡ " + t('cv.exitFullscreen') : "⛶ " + t('cv.fullscreen') }}
         </button>
         <a class="btn-primary" :href="cvDownloadUrl" target="_blank" rel="noopener noreferrer">
-          Download PDF ⬇
+          {{ t('cv.download') }} ⬇
         </a>
       </div>
     </header>
@@ -32,9 +32,9 @@
         <span class="dot red" aria-hidden="true"></span>
         <span class="dot yellow" aria-hidden="true"></span>
         <span class="dot green" aria-hidden="true"></span>
-        <span class="viewer-title">CV — {{ state.aboutMe[0]?.name }} ({{ state.aboutMe[0]?.alias }})</span>
+        <span class="viewer-title">{{ t('cv.title') }} — {{ state.aboutMe[0]?.name }} ({{ state.aboutMe[0]?.alias }})</span>
         <a class="viewer-link" :href="cvOpenUrl" target="_blank" rel="noopener noreferrer">
-          Open in Drive ↗
+          {{ t('cv.openDrive') }}
         </a>
       </div>
       <div class="wrapper-cv">
@@ -44,7 +44,7 @@
     </div>
 
     <a class="download-btn" :href="cvDownloadUrl" target="_blank" rel="noopener noreferrer">
-      Download it here! ⬇
+      {{ t('cv.downloadBottom') }} ⬇
     </a>
   </div>
 </template>
@@ -73,6 +73,7 @@ const cvDownloadUrl = `https://drive.google.com/file/d/${CV_FILE_ID}/view`;
 const cvOpenUrl = `https://drive.google.com/file/d/${CV_FILE_ID}/view`;
 
 /** Modo pantalla completa del visor (Fullscreen API). */
+const { t } = useI18n();
 const isFullscreen = ref(false);
 
 const toggleFullscreen = () => {
