@@ -1,32 +1,49 @@
 <template>
   <div class="container-home">
-    <div class="container-greeting">
-      <div class="container-illustration">
-        <a href="https://www.linkedin.com/in/daniel-losada17/" target="_blank" rel="noopener noreferrer">
-          <!-- Imagen de perfil: el tamaño se controla por CSS. -->
-          <img :src="state.aboutMe[0]?.picture_url" alt="Yo" />
-        </a>
+    <!-- HERO: saludo + tarjeta de perfil con tilt 3D -->
+    <section class="hero" v-reveal>
+      <div class="hero-text">
+        <p class="hero-hi">👋 Hi there, I'm</p>
+        <h1 class="hero-name">{{ state.aboutMe[0]?.name }}</h1>
+        <p class="hero-role">{{ state.aboutMe[0]?.position }}</p>
+        <div class="hero-cta">
+          <RouterLink to="/web-portfolio" class="btn-primary">View my work 🚀</RouterLink>
+          <RouterLink to="/contact-me" class="btn-ghost">Get in touch</RouterLink>
+        </div>
       </div>
-      <div class="container-skills">
-        <!-- Un bloque por cada área de skills (frontend, backend...).
-             `area` es la clave del objeto `state.languages`. -->
-        <div class="skill" v-for="area in state.areaName" :key="area">
-          <h2 class="title">{{ area }} skills</h2>
-          <hr width="100%" />
-          <div class="container-skill-item">
-            <div class="skills-wrapper">
-              <div
-                class="skill-item"
-                v-for="(language, index) in state.languages[area]"
-                :key="language.name ?? index"
-              >
-                <img width="40" :src="language.img" :alt="language.name" loading="lazy" />
-                <span>{{ language.name }}</span>
-                <Progress
-                  :percent-progress="language.percent"
-                  :color-progress="language.color"
-                />
-              </div>
+
+      <!-- Tarjeta 3D: rota en perspectiva siguiendo el ratón. -->
+      <div
+        class="card-3d"
+        :style="tiltStyle"
+        @mousemove="onTilt"
+        @mouseleave="resetTilt"
+      >
+        <div class="container-illustration">
+          <a href="https://www.linkedin.com/in/daniel-losada17/" target="_blank" rel="noopener noreferrer">
+            <img :src="state.aboutMe[0]?.picture_url" alt="Me" />
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="container-skills">
+      <div class="skill" v-for="(area, i) in state.areaName" :key="area" v-reveal="i * 80">
+        <h2 class="title">{{ area }} skills</h2>
+        <hr width="100%" />
+        <div class="container-skill-item">
+          <div class="skills-wrapper">
+            <div
+              class="skill-item"
+              v-for="(language, index) in state.languages[area]"
+              :key="language.name ?? index"
+            >
+              <img width="40" :src="getSkillIcon(language)" :alt="language.name" loading="lazy" />
+              <span>{{ language.name }}</span>
+              <Progress
+                :percent-progress="language.percent"
+                :color-progress="language.color"
+              />
             </div>
           </div>
         </div>
@@ -39,16 +56,36 @@
 /**
  * Home.vue
  * ---------------------------------------------------------------
- * Vista principal: muestra el perfil y las skills organizadas por
- * áreas con barras de progreso.
- *
- * Migrado a <script setup>. keys estables por nombre (no índice) y
- * loading="lazy" en los logos (difieren imágenes fuera de viewport).
+ * Vista principal: hero con tarjeta de perfil con efecto tilt 3D
+ * (perspectiva CSS que sigue al ratón) + skills por áreas con
+ * barras de progreso. Animaciones de entrada con v-reveal.
  */
 import Progress from "../../layout/progress-bar/Progress.vue";
+import { RouterLink } from "vue-router";
+import { reactive, computed } from "vue";
 import { useState } from "../../../utils/globalState.js";
+import { getSkillIcon } from "../../../utils/skillIcons.js";
 
 const state = useState();
+
+/** Estado del tilt 3D (grados de rotación según posición del ratón). */
+const tilt = reactive({ x: 0, y: 0 });
+
+const onTilt = (event) => {
+  const rect = event.currentTarget.getBoundingClientRect();
+  // Normaliza la posición del ratón a [-1, 1] dentro de la tarjeta.
+  tilt.x = ((event.clientY - rect.top) / rect.height - 0.5) * -14;
+  tilt.y = ((event.clientX - rect.left) / rect.width - 0.5) * 14;
+};
+
+const resetTilt = () => {
+  tilt.x = 0;
+  tilt.y = 0;
+};
+
+const tiltStyle = computed(() => ({
+  transform: `perspective(900px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+}));
 </script>
 
 <style lang="sass">

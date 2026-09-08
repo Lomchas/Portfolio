@@ -9,7 +9,18 @@
       name="description"
       content="Daniel Losada - Full Stack Web Developer. Portfolio with skills, projects, CV and contact."
     />
-    <meta name="theme-color" content="#242424" />
+    <meta name="theme-color" content="#070b14" />
+    <!-- Aplica el tema ANTES del primer render para evitar "flash"
+         del tema incorrecto (lee localStorage / preferencia del sistema). -->
+    <script>
+      (function () {
+        var t = localStorage.getItem("portfolio-theme");
+        if (t !== "light" && t !== "dark") {
+          t = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        }
+        document.documentElement.setAttribute("data-theme", t);
+      })();
+    </script>
     <!-- Preconnect: establece la conexión (DNS + TLS) con el backend
          y con Google Drive en paralelo al parseo del HTML, reduciendo
          la latencia de la primera petición (crítico: Render free tier

@@ -1,115 +1,101 @@
-# ENGLISH 
+# 🚀 Daniel Losada — Full-Stack Portfolio
 
-## My Fullstack Portfolio
+> 👨‍💻 Modern, animated, 3D-feel portfolio built with **Vue 3 + Vite + Sass**. Features dark/light themes, an animated starfield background, AI integrations section and a fully responsive design.
 
-> 👨‍💻 Welcome to my Fullstack Portfolio! Explore my skills, projects, and more.
-
-![Portfolio Banner](https://github.com/user-attachments/assets/3a9af769-7ec0-4a6d-bb4e-d8014622be8e)
+![Home](docs/screenshots/home.png)
 
 ## 📖 Table of Contents
-- [About](#about)
-- [Skills](#skills)
-- [Experience](#experience)
-- [Projects](#projects)
-- [Contact](#contact)
+- [✨ Features](#-features)
+- [🖼️ Screenshots](#️-screenshots)
+- [🧠 Tech Stack](#-tech-stack)
+- [💪 Skills](#-skills)
+- [🧰 Experience](#-experience)
+- [📞 Contact](#-contact)
 
-## 📄 About
-In this portfolio, you'll find information about me, a passionate fullstack developer. I strive to create seamless web applications with a focus on user experience and performance. Learn more about my background and journey as a developer.
+## ✨ Features
+- 🌗 **Dark / Light theme** — persistent, system-aware, smooth transitions
+- 🌌 **Animated 3D starfield background** (canvas particle projection) + aurora orbs
+- 🃏 **3D tilt profile card** that follows the mouse (Home hero)
+- 📊 **Skill level system** — 5-dot levels with honest labels (Expert, Advanced…) instead of fake percentages
+- 🙋 **Modern About-Me** — photo with rotating gradient ring, tech chips, dynamic skill-area cards
+- 🧠 **AI Integrations module** — prompting, apps & API integrations, generative content and automations (proven experience at **Renault Sofasa Colombia**)
+- 📄 **CV viewer** — macOS-style document frame, fullscreen mode, quick download
+- ✉️ **Modern contact experience** — availability badge, copy-email button, floating labels, live validation, CSS spinner
+- 📱 **Fully responsive** — dedicated layouts for tablet and mobile with a compact burger menu
+- ⚡ Lazy-loaded routes, `prefers-reduced-motion` support, no external UI libraries
+
+## 🖼️ Screenshots
+
+| Home (3D hero + skills) | About Me |
+|---|---|
+| ![Home](docs/screenshots/home.png) | ![About Me](docs/screenshots/about-me.png) |
+
+| AI Integrations | Contact Me |
+|---|---|
+| ![AI Integrations](docs/screenshots/ai-integrations.png) | ![Contact Me](docs/screenshots/contact-me.png) |
+
+| CV Viewer |
+|---|
+| ![CV](docs/screenshots/cv.png) |
+
+## 🧠 Tech Stack
+- **Framework**: Vue 3 (Composition API, `<script setup>`)
+- **Bundler**: Vite 7
+- **Styling**: Sass (SCSS), CSS custom properties design tokens, glassmorphism
+- **Routing**: Vue Router 4 (lazy routes + page transitions)
+- **HTTP**: Axios
+- **Icons & assets**: devicon CDN, custom illustrations
+- **Deploy**: Vercel — [Live demo](https://portfolio-daniellosada.vercel.app/)
 
 ## 💪 Skills
-- **Frontend**: HTML, CSS, JavaScript, Vue.js, React.js
-- **Backend**: Node.js y Express.js 
-- **Databases**: MySQL, MongoDB, SQL-SERVER
-- **DevOps**: Git, Railway, Vercel, Heroku
+- **Frontend**: HTML, CSS/SCSS, JavaScript, Vue.js, React.js, Tailwind, Bootstrap
+- **Backend**: Node.js, Express.js, Python, PHP, C#
+- **Databases**: MySQL, MongoDB, SQL Server
+- **AI**: LLM prompting, OpenAI/Gemini API integrations, process automation
+- **DevOps**: Git, Vercel, Railway, Google Cloud, Azure
 
 ## 🧰 Experience
-- **ATHMOS SAS** - Front-end Developer (2022-2022) *July - December*
-  - Developed and maintained web applications using Vue.js.
-  - Collaborated with cross-functional teams to deliver high-quality software solutions.
-
-## 🚀 Projects
-Check out some of my notable projects:
-
-<!-- 1. **Project A**
-   - Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eget semper turpis.
-   - Technologies: Vue.js, Node.js, MongoDB
-   - Repository: [GitHub](https://github.com/username/project-a)
-   - Live Demo: [Project A](https://example.com/project-a)
-
-2. **Project B**
-   - Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eget semper turpis.
-   - Technologies: React, Express.js, MySQL
-   - Repository: [GitHub](https://github.com/username/project-b)
-   - Live Demo: [Project B](https://example.com/project-b) -->
+- **ATHMOS SAS** — Front-end Developer (2022)
+- **Renault Sofasa Colombia** — AI-driven process automation experience (administrative & industrial)
 
 ## 📞 Contact
-Feel free to reach out to me for collaboration or any inquiries:
-
 - Email: **daniellosada17@gmail.com**
 - LinkedIn: [Daniel Losada](https://www.linkedin.com/in/daniel-losada17/)
-- Website: [Deploy-Link](https://portfolio-daniellosada.vercel.app/)
+- GitHub: [Lomchas](https://github.com/Lomchas)
+- Website: [portfolio-daniellosada.vercel.app](https://portfolio-daniellosada.vercel.app/)
 
 ---
 
-Don't hesitate to explore this portfolio to learn more about my skills, projects, and experience. If you have any questions or would like to discuss potential opportunities, feel free to get in touch.
+Thank you for visiting! If you have any questions or would like to discuss an opportunity, feel free to reach out. 🚀
 
-Thank you for visiting my Fullstack Portfolio!
+---
 
-# ESPAÑOL
+# 🇪🇸 Español
 
-# Mi Portafolio Fullstack
+# 🚀 Portafolio Full-Stack — Daniel Losada
 
-> 👨‍💻 ¡Bienvenido/a a mi Portafolio Fullstack! Explora mis habilidades, proyectos y más.
+> 👨‍💻 Portafolio moderno y animado construido con **Vue 3 + Vite + Sass**: temas claro/oscuro, fondo de estrellas 3D, módulo de integraciones con IA y diseño 100% responsivo.
 
-![Banner del Portafolio](https://github.com/user-attachments/assets/4c70a701-1ffe-498d-aee5-faa89f14f58e)
+![Home](docs/screenshots/home.png)
 
+## ✨ Características
+- 🌗 **Tema claro / oscuro** persistente, con detección del sistema
+- 🌌 **Fondo de estrellas 3D animado** (proyección de partículas en canvas) + orbes aurora
+- 🃏 **Tarjeta de perfil con tilt 3D** que sigue al ratón
+- 📊 **Sistema de niveles de skills** — 5 puntos + etiquetas honestas (Expert, Advanced…) en lugar de porcentajes falsos
+- 🙋 **About-Me moderno** — foto con anillo giratorio, chips de tecnologías y tarjetas por área
+- 🧠 **Módulo de Integraciones con IA** — prompting, integración con apps/APIs, contenido generativo y automatizaciones (experiencia comprobable en **Renault Sofasa Colombia**)
+- 📄 **Visor de CV** con marco tipo documento, pantalla completa y descarga rápida
+- ✉️ **Contacto moderno** — badge de disponibilidad, copiar email, labels flotantes y validación en vivo
+- 📱 **Totalmente responsivo** con menú hamburguesa compacto
 
-## 📖 Tabla de Contenidos
-- [Acerca de mí](#acerca-de-mí)
-- [Habilidades](#habilidades)
-- [Experiencia](#experiencia)
-- [Proyectos](#proyectos)
-- [Contacto](#contacto)
-
-## 📄 Acerca de mí
-En este portafolio encontrarás información sobre mí, un apasionado desarrollador fullstack. Me esfuerzo por crear aplicaciones web fluidas con un enfoque en la experiencia del usuario y el rendimiento. Aprende más sobre mi trayectoria y experiencia como desarrollador.
-
-## 💪 Habilidades
-- **Frontend**: HTML, CSS, JavaScript, Vue.js, React.js
-- **Backend**: Node.js y Express.js 
-- **Databases**: MySQL, MongoDB, SQL-SERVER
-- **DevOps**: Git, Railway, Vercel, Heroku
-
-## 🧰 Experiencia
-- **ATHMOS SAS** - Front-end Developer (2022-2022) *July - December*
-  - Developed and maintained web applications using Vue.js.
-  - Collaborated with cross-functional teams to deliver high-quality software solutions.
-
-
-## 🚀 Proyectos
-Descubre algunos de mis proyectos destacados:
-<!-- 
-1. **Proyecto A**
-   - Descripción: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eget semper turpis.
-   - Tecnologías: Vue.js, Node.js, MongoDB
-   - Repositorio: [GitHub](https://github.com/usuario/proyecto-a)
-   - Demo en vivo: [Proyecto A](https://ejemplo.com/proyecto-a)
-
-2. **Proyecto B**
-   - Descripción: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eget semper turpis.
-   - Tecnologías: React, Express.js, MySQL
-   - Repositorio: [GitHub](https://github.com/usuario/proyecto-b)
-   - Demo en vivo: [Proyecto B](https://ejemplo.com/proyecto-b) -->
+## 🖼️ Capturas
+Ver sección [Screenshots](#️-screenshots) arriba.
 
 ## 📞 Contacto
-No dudes en contactarme para colaboraciones o cualquier consulta:
-
 - Email: **daniellosada17@gmail.com**
 - LinkedIn: [Daniel Losada](https://www.linkedin.com/in/daniel-losada17/)
-- Sitio web: [Deploy-Link](https://portfolio-daniellosada.vercel.app/)
+- GitHub: [Lomchas](https://github.com/Lomchas)
+- Sitio web: [portfolio-daniellosada.vercel.app](https://portfolio-daniellosada.vercel.app/)
 
----
-
-Siéntete libre de explorar este portafolio para conocer más sobre mis habilidades, proyectos y experiencia. Si tienes alguna pregunta o deseas discutir posibles oportunidades, no dudes en comunicarte.
-
-¡Gracias por visitar mi Portafolio Fullstack!
+¡Gracias por visitar mi portafolio! 🚀

@@ -40,6 +40,11 @@ const routes = [
     component: () => import("../components/views/web-portfolio/WebPortfolio.vue"),
   },
   {
+    path: "/ai-integrations",
+    name: "ai-integrations",
+    component: () => import("../components/views/ai-integrations/AiIntegrations.vue"),
+  },
+  {
     path: "/contact-me",
     name: "contact-me",
     component: () => import("../components/views/contact-me/ContactMe.vue"),

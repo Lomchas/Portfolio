@@ -1,19 +1,32 @@
 <template>
   <footer class="container-footer">
     <div class="footer-content">
+      <!-- Bloque de información: alineado a la izquierda, filas
+           etiqueta/valor para una lectura limpia y ordenada. -->
       <div class="footer-info">
-        <h2>{{ state.aboutMe[0]?.name }}</h2>
-        <p>({{ state.aboutMe[0]?.alias }})</p>
-        <p>Cargo: {{ state.aboutMe[0]?.position }}</p>
-        <p>Ubicación: {{ state.aboutMe[0]?.location }}</p>
-        <p>
-          Correo:
-          <a
-            :href="`https://mail.google.com/mail/?view=cm&to=${state.aboutMe[0]?.email}`"
-            target="_blank"
-            rel="noopener noreferrer"
-          >{{ state.aboutMe[0]?.email }}</a>
-        </p>
+        <h2 class="footer-name">
+          {{ state.aboutMe[0]?.name }}
+          <span class="footer-alias">({{ state.aboutMe[0]?.alias }})</span>
+        </h2>
+        <ul class="info-list">
+          <li>
+            <span class="label">Cargo</span>
+            <span class="value">{{ state.aboutMe[0]?.position }}</span>
+          </li>
+          <li>
+            <span class="label">Ubicación</span>
+            <span class="value">{{ state.aboutMe[0]?.location }}</span>
+          </li>
+          <li>
+            <span class="label">Correo</span>
+            <a
+              class="value"
+              :href="`https://mail.google.com/mail/?view=cm&to=${state.aboutMe[0]?.email}`"
+              target="_blank"
+              rel="noopener noreferrer"
+            >{{ state.aboutMe[0]?.email }}</a>
+          </li>
+        </ul>
       </div>
       <!-- Redes sociales: se generan desde una constante para evitar
            duplicar la misma estructura tres veces. -->
@@ -24,6 +37,7 @@
           :href="social.href"
           target="_blank"
           rel="noopener noreferrer"
+          :aria-label="social.alt"
         >
           <img :src="social.icon" :alt="social.alt" loading="lazy" />
         </a>

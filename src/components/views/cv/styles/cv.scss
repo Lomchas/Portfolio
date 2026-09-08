@@ -1,76 +1,272 @@
-// Modernización Sass: @use sustituye a @import (deprecado).
+// cv.scss — vista CV (visor de documento moderno)
 @use './cv@media.scss' as *;
 
 .container-cv {
-  width: 90vw;
-  height: 100%;
-  background-color: transparent;
-  box-shadow: 0 0 15px black;
-  border-radius: 15px;
-  margin: 50px auto;
-  padding: 20px 20px 40px;
-  overflow: hidden;
+  width: 88vw;
+  max-width: 1250px;
+  margin: 30px auto 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 
-  .container-title {
+  // ---- Encabezado: título + chips + acciones ----
+  .cv-header {
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: center;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding: 26px 30px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    backdrop-filter: var(--glass-blur);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    transition: border-color 0.3s ease;
 
-    .title {
-      margin: 0;
-      text-align: center;
-      font-size: 32px;
-      font-weight: bold;
-      font-style: oblique;
-      font-family: "Bruno Ace SC", cursive;
+    &:hover {
+      border-color: var(--accent);
     }
 
-    .container-illustration {
-      @keyframes heartbeat {
-        0% {
-          filter: drop-shadow(0 0 0 transparent);
+    .cv-heading {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      min-width: 0;
+
+      .container-illustration {
+        @keyframes heartbeat {
+          0% {
+            filter: drop-shadow(0 0 0 transparent);
+          }
+          50% {
+            filter: drop-shadow(0 0 10px var(--accent));
+          }
+          100% {
+            filter: drop-shadow(0 0 0 transparent);
+          }
         }
-        50% {
-          filter: drop-shadow(0 0 10px #2b97fa);
+
+        img {
+          width: 76px;
+          animation: heartbeat 1.6s infinite;
+          transition: transform 0.3s ease;
+
+          &:hover {
+            animation-play-state: paused;
+            transform: scale(1.1);
+          }
         }
-        100% {
-          filter: drop-shadow(0 0 0 transparent);
-        }
-      }
-      img {
-        width: 100px;
-        transition: all 0.3s ease-in-out;
-        animation: heartbeat 1.2s infinite;
       }
 
-      img:hover {
-        animation-play-state: paused;
-        filter: drop-shadow(0 0 10px #2b97fa);
+      .title {
+        margin: 0 0 8px;
+        font-family: var(--font-display);
+        font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      // Chips de resumen personal (datos reales de la API).
+      .cv-meta {
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+
+        .meta-chip {
+          padding: 5px 12px;
+          border-radius: 999px;
+          background: var(--card-hover);
+          border: 1px solid var(--border);
+          font-family: var(--font-display);
+          font-size: 0.7rem;
+          color: var(--text-muted);
+          white-space: nowrap;
+        }
+      }
+    }
+
+    .cv-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+
+      .btn-primary {
+        padding: 12px 22px;
+        border-radius: 12px;
+        font-family: var(--font-display);
+        font-size: 0.85rem;
+        color: #fff;
+        background: linear-gradient(120deg, var(--accent), var(--accent-2));
+        box-shadow: 0 6px 22px var(--accent-glow);
+        transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+
+        &:hover {
+          transform: translateY(-3px) scale(1.03);
+          color: #fff;
+          box-shadow: 0 10px 30px var(--accent-glow);
+        }
+      }
+
+      .btn-ghost {
+        padding: 12px 18px;
+        border-radius: 12px;
+        font-family: var(--font-display);
+        font-size: 0.85rem;
+        color: var(--text);
+        background: var(--card);
+        border: 1px solid var(--border);
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+
+        &:hover {
+          transform: translateY(-3px);
+          border-color: var(--accent);
+          color: var(--accent);
+        }
       }
     }
   }
 
-  hr {
-    width: 100%;
-    opacity: 0.3;
-  }
+  // ---- Visor tipo "documento": barra de ventana + PDF ----
+  .viewer-frame {
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    background: var(--bg-soft);
+    transition: border-color 0.3s ease;
 
-  .wrapper-cv {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 1100px;
-    margin: 40px 0;
+    &:hover {
+      border-color: var(--accent);
+    }
 
-    .cv {
+    // Barra superior estilo ventana de SO.
+    .viewer-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 18px;
+      background: var(--card-hover);
+      border-bottom: 1px solid var(--border);
+
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        flex-shrink: 0;
+
+        &.red {
+          background: #ff5f57;
+        }
+        &.yellow {
+          background: #febc2e;
+        }
+        &.green {
+          background: #28c840;
+        }
+      }
+
+      .viewer-title {
+        margin-left: 10px;
+        font-family: var(--font-display);
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        flex: 1;
+      }
+
+      .viewer-link {
+        font-family: var(--font-display);
+        font-size: 0.72rem;
+        color: var(--accent);
+        white-space: nowrap;
+
+        &:hover {
+          text-shadow: 0 0 10px var(--accent-glow);
+        }
+      }
+    }
+
+    .wrapper-cv {
       width: 100%;
-      height: 100%;
+      height: 1150px;
+
+      .cv {
+        width: 100%;
+        height: 100%;
+        border: none;
+        display: block;
+      }
+    }
+
+    // Modo pantalla completa: el visor ocupa todo.
+    &:fullscreen {
+      border-radius: 0;
+      display: flex;
+      flex-direction: column;
+
+      .wrapper-cv {
+        flex: 1;
+        height: auto;
+      }
     }
   }
 
-  .download-btn{
-    font-size: 24px;
-    color: #2b97fa;
+  // Botón inferior de descarga.
+  .download-btn {
+    width: fit-content;
+    margin: 0 auto;
+    padding: 13px 30px;
+    border-radius: 12px;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    color: #fff;
+    background: linear-gradient(120deg, var(--accent), var(--accent-2));
+    box-shadow: 0 6px 22px var(--accent-glow);
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+
+    &:hover {
+      transform: translateY(-3px) scale(1.03);
+      color: #fff;
+      box-shadow: 0 10px 32px var(--accent-glow);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .container-illustration img {
+    animation: none;
+  }
+}
+
+// ---- Responsive ----
+@media screen and (max-width: 900px) {
+  .container-cv {
+    width: 94vw;
+
+    .viewer-frame .wrapper-cv {
+      height: 900px;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container-cv {
+    width: 96vw;
+
+    .cv-header {
+      padding: 20px 18px;
+    }
+
+    .viewer-frame .wrapper-cv {
+      height: 620px;
+    }
   }
 }

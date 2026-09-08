@@ -1,6 +1,6 @@
 <template>
   <div class="container-webPortfolio">
-    <div class="container-title">
+    <div class="container-title" v-reveal>
       <img :src="illustration3" alt="illustration3" loading="lazy" />
       <h2 class="title">Portfolio</h2>
       <!-- Filtro por tipo de proyecto, generado con v-for. -->
@@ -19,7 +19,7 @@
     <hr />
     <div class="container-projects">
       <div class="wrapper-projects">
-        <div class="project" v-for="project in projectsToShow" :key="project.name">
+        <div class="project" v-for="(project, i) in projectsToShow" :key="project.name" v-reveal="(i % 2) * 100">
           <div class="info">
             <h3 class="name">{{ project.name }}</h3>
             <p class="desc">{{ project.description }}</p>

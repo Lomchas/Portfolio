@@ -1,593 +1,139 @@
-@media (min-width: 1200px){ 
-  .smallNav {
-    .container-mainIfo {
-      img {
-      }
+// nav@media.scss - responsive del nav (version limpia)
+// Regla de oro: los botones (tema/hamburguesa) tienen tamano fijo y
+// flex-shrink: 0 -> nunca se encogen ni desaparecen. El menu horizontal
+// se sustituye por la hamburguesa por debajo de 1100px.
 
-      .info {
-        .name {
-          font-size: calc(14px + .5vw) !important;
-        }
-        .position {
-          font-size: calc(14px + .2vw) !important;
-        }
+.container-nav {
+  .container-mainIfo {
+    img {
+      flex-shrink: 0;
+    }
+
+    .info {
+      min-width: 0;
+
+      .name,
+      .position {
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
-    .container-button-bar{ 
-      .btn-bar{
-        transform: scale(1.4);
+  }
+
+  .container-button-bar {
+    flex-shrink: 0;
+
+    .theme-toggle {
+      width: 42px;
+      height: 42px;
+      flex-shrink: 0;
+
+      .theme-icon {
+        width: 20px;
+        height: 20px;
       }
-    
     }
   }
 }
 
-@media screen and (max-width: 1200px) {
+// Escritorio compacto / tablet horizontal: menu mas pequeno.
+@media screen and (max-width: 1280px) {
   .container-nav {
-    width: 100vw;
-    height: 20vh !important;
-
-    .container-mainIfo {
-      margin: 0 10px 0 25px !important;
-
-      img {
-        width: 80px !important;
-        height: 80px !important;
-      }
-
-      .info {
-        line-height: 1.1 !important;
-
-        .name {
-          font-size: 20px !important;
-        }
-        .position {
-          font-size: 15px !important;
-        }
-      }
-    }
-
-    .menu-options {
-      margin: 0 20px 0 20px !important;
-
-      ol {
-        a {
-          font-size: 14px !important;
-          padding: 5px 20px !important;
-        }
-
-        .led-effect:hover {
-          color: white;
-          transform: scale(1);
-          box-shadow: 0px 5px 25px #2b96facb;
-          transition: all 0.3s;
-        }
-      }
-    }
-  }
-
-  .smallNav {
-    .container-mainIfo {
-      img {
-      }
-
-      .info {
-        .name {
-        }
-        .position {
-          font-size: 14px !important;
-        }
-      }
-    }
-
-    .menu-options {
-    }
-  }
-}
-
-@media screen and (max-width: 900px) {
-  .container-nav {
-    width: 100vw;
     height: 15vh !important;
 
     .container-mainIfo {
-      margin: 0 10px 0 20px !important;
+      margin: 0 14px 0 24px;
+
+      img {
+        width: 72px !important;
+        height: 72px !important;
+      }
+
+      .info .name {
+        font-size: 19px !important;
+      }
+
+      .info .position {
+        font-size: 12px !important;
+        width: auto !important;
+      }
+    }
+  }
+
+  .smallNav {
+    .container-mainIfo {
+      width: auto !important;
+    }
+  }
+}
+
+// <=1100px: el menu horizontal no cabe -> hamburguesa.
+@media screen and (max-width: 1100px) {
+  .container-nav {
+    height: 13vh !important;
+
+    .menu-options {
+      display: none !important;
+    }
+
+    .container-button-bar .btn-bar {
+      display: block !important;
+      width: 42px !important;
+      height: 42px !important;
+      padding: 7px !important;
+    }
+
+    .container-mainIfo {
+      margin: 0 12px 0 20px;
 
       img {
         width: 60px !important;
         height: 60px !important;
       }
 
-      .info {
-        line-height: 1.2 !important;
-
-        .name {
-          font-size: 18px !important;
-        }
-        .position {
-          font-size: 10px !important;
-        }
-      }
-    }
-    .menu-options {
-      margin: 0 20px 0 10px !important;
-
-      ol {
-        a {
-          background-color: transparent !important;
-          border-bottom: 2px solid #2b96facb;
-          font-size: 12px !important;
-          padding: 5px 15px 0px !important;
-        }
-
-        .led-effect:hover {
-          box-shadow: 0px 5px 9px #2b96facb !important;
-        }
-      }
-    }
-
-    .second-menu-options {
-      transform: translateX(1000px);
-      visibility: hidden;
-      opacity: 0;
-      width: 30% !important;
-      padding: 4rem 2rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: start;
-      background-color: #1d1d1d;
-      position: absolute;
-      right: 0;
-      top: 0;
-      height: 100vh;
-      z-index: 10000;
-      box-shadow: 0px 0px 8px 100vmax rgba(0, 0, 0, 0.596);
-      transition: all 0.5s ease-in-out;
-
-      .btn-close-second-menu {
-        width: 40px;
-        height: 40px;
-        font-size: 24px;
-        background-color: transparent;
-        border: none;
-        text-shadow: 0px 2px 8px #2b96fa;
-        cursor: pointer;
-        transition: all 0.3s ease-in-out;
+      .info .name {
+        font-size: 17px !important;
       }
 
-      .btn-close-second-menu:hover {
-        transform: scale(1.1);
+      .info .position {
+        display: none;
       }
-
-      ol {
-        width: 100%;
-        padding: 0;
-        margin: 80px 0 0;
-        display: flex;
-        flex-direction: column;
-        align-items: end;
-        justify-content: center;
-        gap: 30px;
-
-        a {
-          color: rgba(255, 255, 255, 0.486);
-          font-family: "Bruno Ace SC", cursive;
-          border-bottom: 1px solid #2b96facb;
-          width: 90%;
-          height: 50px;
-          padding: 0 10px 0 0;
-          font-size: 16px !important;
-          text-align: end;
-          transition: all 0.3s ease-in;
-        }
-
-        a:hover {
-          box-shadow: 0 0 10px 2px #2b96fa;
-          border: none;
-          border-radius: 10px;
-        }
-
-        .active {
-          color: white;
-          box-shadow: 0 0 10px 2px #2b96fa;
-          border: none;
-          border-radius: 10px;
-        }
-      }
-    }
-
-    .open {
-      visibility: visible;
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-
-  .smallNav {
-    .container-mainIfo {
-      img {
-      }
-
-      .info {
-        .name {
-        }
-        .position {
-          font-size: 12px !important;
-        }
-      }
-    }
-    .menu-options {
-    }
-
-    .second-menu-options {
-      transform: translateX(1000px);
-      visibility: hidden;
-      opacity: 0;
-      width: 30% !important;
-      padding: 4rem 2rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: start;
-      background-color: #1d1d1d;
-      position: absolute;
-      right: 0;
-      top: 0;
-      height: 100vh;
-      z-index: 10000;
-      box-shadow: 0px 0px 8px 100vmax rgba(0, 0, 0, 0.596);
-      transition: all 0.5s ease-in-out;
-
-      .btn-close-second-menu {
-        width: 40px;
-        height: 40px;
-        font-size: 24px;
-        background-color: transparent;
-        border: none;
-        text-shadow: 0px 2px 8px #2b96fa;
-        cursor: pointer;
-        transition: all 0.3s ease-in-out;
-      }
-
-      .btn-close-second-menu:hover {
-        transform: scale(1.1);
-      }
-
-      ol {
-        width: 100%;
-        padding: 0;
-        margin: 80px 0 0;
-        display: flex;
-        flex-direction: column;
-        align-items: end;
-        justify-content: center;
-        gap: 30px;
-
-        a {
-          color: rgba(255, 255, 255, 0.486);
-          font-family: "Bruno Ace SC", cursive;
-          border-bottom: 1px solid #2b96facb;
-          width: 90%;
-          height: 50px;
-          padding: 0 10px 0 0;
-          font-size: 16px !important;
-          text-align: end;
-          transition: all 0.3s ease-in;
-        }
-
-        a:hover {
-          box-shadow: 0 0 10px 2px #2b96fa;
-          border: none;
-          border-radius: 10px;
-        }
-
-        .active {
-          color: white;
-          box-shadow: 0 0 10px 2px #2b96fa;
-          border: none;
-          border-radius: 10px;
-        }
-      }
-    }
-
-    .open {
-      visibility: visible;
-      transform: translateX(0);
-      opacity: 1;
     }
   }
 }
 
-@media screen and (max-width: 700px) {
-  .container-nav {
-    width: 100vw;
-    height: 15vh !important;
-
-    .container-mainIfo {
-      width: 70% !important;
-      margin: 0 10px 0 20px !important;
-
-      img {
-        width: 70px !important;
-        height: 70px !important;
-      }
-
-      .info {
-        line-height: 1.2 !important;
-
-        .name {
-          font-size: 24px !important;
-        }
-        .position {
-          font-size: 16px !important;
-        }
-      }
-    }
-
-    .menu-options {
-      display: none !important;
-    }
-
-    .second-menu-options {
-      transform: translateX(1000px);
-      visibility: hidden;
-      opacity: 0;
-      width: 100% !important;
-      padding: 1rem 0rem !important;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start !important;
-      align-items: center !important;
-      background-color: #1d1d1d;
-      position: absolute;
-      right: 0;
-      top: 0;
-      height: 100vh;
-      z-index: 10000;
-      box-shadow: 0px 0px 8px 100vmax rgba(0, 0, 0, 0.596);
-      transition: all 0.5s ease-in-out;
-
-      .btn-close-second-menu {
-        width: 40px;
-        height: 40px;
-        font-size: 24px;
-        background-color: transparent;
-        border: none;
-        text-shadow: 0px 2px 8px #2b96fa;
-        cursor: pointer;
-        transition: all 0.3s ease-in-out;
-      }
-
-      .btn-close-second-menu:hover {
-        transform: scale(1.1);
-      }
-
-      ol {
-        width: 100%;
-        padding: 0;
-        margin: 80px 0 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center !important;
-        justify-content: center;
-        gap: 30px;
-
-        a {
-          color: rgba(255, 255, 255, 0.486);
-          font-family: "Bruno Ace SC", cursive;
-          border-bottom: 1px solid #2b96facb;
-          width: 90%;
-          height: 50px;
-          padding: 0 !important;
-          font-size: 16px !important;
-          text-align: center !important;
-          transition: all 0.3s ease-in;
-        }
-
-        a:hover {
-          box-shadow: 0 0 10px 2px #2b96fa;
-          border: none;
-          border-radius: 10px;
-        }
-
-        .active {
-          color: white;
-          box-shadow: 0 0 10px 2px #2b96fa;
-          border: none;
-          border-radius: 10px;
-        }
-      }
-    }
-
-    .open {
-      visibility: visible;
-      transform: translateX(0);
-      opacity: 1;
-    }
-
-    .container-button-bar {
-      transform: translateX(0px) !important;
-      transition: all 1s ease-in;
-      position: absolute;
-      right: 0;
-      display: flex;
-      width: 20%;
-      justify-content: flex-end;
-      align-items: center;
-      padding: 0 40px 0;
-
-      .btn-bar {
-        cursor: pointer;
-        width: 50px;
-        height: 50px;
-        padding: 0;
-        background-color: transparent;
-        border: none;
-        border-radius: 50%;
-        transition: all 1s ease-in-out;
-
-        img {
-          width: 100%;
-          filter: drop-shadow(0px 0px 8px #2b96facb);
-        }
-      }
-
-      .btn-bar :hover {
-        transform: scale(1.1);
-        filter: drop-shadow(0px 0px 10px #2b96fa);
-      }
-    }
-  }
-
-  .smallNav {
-    .container-mainIfo {
-      img {
-      }
-
-      .info {
-        .name {
-        }
-        .position {
-          font-size: 12px !important;
-        }
-      }
-    }
-
-    .menu-options {
-    }
-  }
-}
-
+// Movil pequeno.
 @media screen and (max-width: 600px) {
   .container-nav {
-    width: 100vw;
-    height: 12vh !important;
+    height: 11vh !important;
 
     .container-mainIfo {
-      width: 70% !important;
-      margin: 0 10px 0 20px !important;
+      margin: 0 10px 0 16px;
 
       img {
-        width: 60px !important;
-        height: 60px !important;
+        width: 46px !important;
+        height: 46px !important;
       }
 
-      .info {
-        line-height: 1.2 !important;
-
-        .name {
-          font-size: 20px !important;
-        }
-        .position {
-          font-size: 14px !important;
-        }
+      .info .name {
+        font-size: 15px !important;
       }
-    }
-
-    .menu-options {
-      display: none !important;
-    }
-  }
-
-  .smallNav {
-    .container-mainIfo {
-      img {
-      }
-
-      .info {
-        .name {
-        }
-        .position {
-          font-size: 12px !important;
-        }
-      }
-    }
-
-    .menu-options {
-    }
-  }
-}
-
-@media screen and (max-width: 428px) {
-  .container-nav {
-    width: 100vw;
-    height: 12vh !important;
-
-    .container-mainIfo {
-      width: 70% !important;
-      margin: 0 10px 0 20px !important;
-
-      img {
-        width: 50px !important;
-        height: 50px !important;
-      }
-
-      .info {
-        line-height: 1.2 !important;
-
-        .name {
-          font-size: 16px !important;
-        }
-        .position {
-          font-size: 12px !important;
-        }
-      }
-    }
-
-    .menu-options {
-      display: none !important;
     }
 
     .container-button-bar {
-      transform: translateX(120px);
-      transition: all 1s ease-in;
-      position: absolute;
-      right: 0;
-      display: flex;
-      width: 20%;
-      justify-content: flex-end;
-      align-items: center;
-      padding: 0 10px 0 !important;
-
-      .btn-bar {
-        cursor: pointer;
-        width: 50px;
-        height: 50px;
-        padding: 0;
-        background-color: transparent;
-        border: none;
-        border-radius: 50%;
-        transition: all 1s ease-in-out;
-
-        img {
-          width: 100%;
-          filter: drop-shadow(0px 0px 8px #2b96facb);
-        }
-      }
-
-      .btn-bar :hover {
-        transform: scale(1.1);
-        filter: drop-shadow(0px 0px 10px #2b96fa);
-      }
+      gap: 10px;
+      margin: 0 12px;
     }
   }
+}
+// Menú lateral móvil: ancho usable en cualquier pantalla.
+@media screen and (max-width: 1100px) {
+  .container-nav .second-menu-options,
+  .smallNav.second-menu-options {
+    width: min(72vw, 320px) !important;
+  }
 
-  .smallNav {
-    .container-mainIfo {
-      img {
-      }
-
-      .info {
-        .name {
-        }
-        .position {
-          font-size: 12px !important;
-        }
-      }
-    }
-
-    .menu-options {
-    }
+  .container-nav .second-menu-options ol a {
+    font-size: 16px !important;
   }
 }

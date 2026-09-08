@@ -1,3 +1,8 @@
+/* ================================================================
+   DESIGN TOKENS — Tema oscuro (default) y claro
+   Todos los componentes consumen estas variables; cambiar de tema
+   solo alterna el atributo data-theme en <html>.
+   ================================================================ */
 :root {
   margin: 0;
   padding: 0;
@@ -6,39 +11,88 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* ---- Tema oscuro ---- */
+  --bg: #070b14;
+  --bg-soft: #0d1424;
+  --bg-nav: rgba(10, 16, 30, 0.75);
+  --card: rgba(255, 255, 255, 0.045);
+  --card-hover: rgba(255, 255, 255, 0.09);
+  --border: rgba(255, 255, 255, 0.1);
+  --text: #e8edf5;
+  --text-muted: #94a3b8;
+  --accent: #38bdf8;
+  --accent-2: #818cf8;
+  --accent-glow: rgba(56, 189, 248, 0.45);
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  --glass-blur: blur(14px);
+  --hero-glow-opacity: 0.5;
+  --star-color: 200, 225, 255;
+
+  color-scheme: dark;
+  color: var(--text);
+  background-color: var(--bg);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --font-display: "Bruno Ace SC", cursive;
+}
+
+/* ---- Tema claro: paleta pastel azul, coherente con el tema oscuro ---- */
+html[data-theme="light"] {
+  /* Fondo blanco-azulado suave (no blanco puro) con tonos que
+     provienen de la misma familia de azules del tema oscuro. */
+  --bg: #e9f1fa;
+  --bg-soft: #f4f9fe;
+  --bg-nav: rgba(240, 247, 254, 0.78);
+  --card: rgba(255, 255, 255, 0.58);
+  --card-hover: rgba(255, 255, 255, 0.92);
+  --border: rgba(47, 105, 170, 0.16);
+  /* Texto en azul marino desaturado (nada de negro puro). */
+  --text: #27496d;
+  --text-muted: #5c7ba0;
+  /* Acentos: los mismos azules del tema oscuro, aclarados. */
+  --accent: #2f7fd1;
+  --accent-2: #7b8ce0;
+  --accent-glow: rgba(47, 127, 209, 0.25);
+  --shadow: 0 8px 30px rgba(47, 100, 170, 0.14);
+  --hero-glow-opacity: 0.22;
+  --star-color: 70, 120, 190;
+
+  color-scheme: light;
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+/* Transición suave al cambiar de tema (sin afectar al fondo canvas) */
+body,
+.container-nav,
+.wrapper-aboutMe,
+.container-webPortfolio .container-projects,
+.container-contactMe,
+.container-cv,
+.container-footer {
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--accent);
   text-decoration: inherit;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
 }
 a:hover {
-  color: #535bf2;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  color: var(--accent-2);
+  text-shadow: 0 0 12px var(--accent-glow);
 }
 
 body {
   padding-top: 20vh;
   display: flex;
-  flex-direction: column ;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -47,14 +101,126 @@ body {
   overflow-x: hidden;
 }
 
+/* Crítico: box-sizing global. Sin esto, cualquier width:100% + padding
+   desborda el viewport (era la causa del footer cortado en desktop). */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
-@media screen and (max-width: 900px) {
-  body{
+/* Crítico para el centrado: #app es hijo directo del body (flex);
+   sin ancho definido se encoge al contenido y TODO el layout
+   (incluido el footer) queda descentrado. */
+#app {
+  width: 100%;
+}
+
+/* Tipografía fluida: en pantallas pequeñas todo escala ligeramente
+   para aprovechar mejor el espacio sin romper layouts. */
+html {
+  font-size: 16px;
+}
+@media screen and (max-width: 700px) {
+  html {
+    font-size: 14.5px;
+  }
+}
+
+/* El padding superior del body debe acompañar la altura del nav
+   en cada breakpoint (definida en nav@media.scss). */
+@media screen and (max-width: 1280px) {
+  body {
+    padding-top: 17vh;
+  }
+}
+@media screen and (max-width: 1100px) {
+  body {
     padding-top: 15vh;
   }
 }
 @media screen and (max-width: 600px) {
-  body{
+  body {
+    padding-top: 13vh;
+  }
+}
+
+/* ---- Scrollbar global moderna ---- */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--accent), var(--accent-2));
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  filter: brightness(1.2);
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ================================================================
+   UTILIDADES DE ANIMACIÓN (consumidas por la directiva v-reveal)
+   ================================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px) scale(0.98);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.reveal-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ================================================================
+   ADAPTACIÓN DE ICONOS/IMÁGENES AL TEMA CLARO
+   Los PNG blancos (diseñados para fondo oscuro) se invierten, y
+   los logos de skills se oscurecen a monocromo para legibilidad.
+   ================================================================ */
+html[data-theme="light"] {
+  /* Icono hamburguesa blanco → oscuro */
+  .btn-bar img {
+    filter: invert(1) drop-shadow(0 0 6px rgba(2, 132, 199, 0.4)) !important;
+  }
+
+  /* Iconos sociales blancos del footer → oscuros */
+  .footer-links a img {
+    filter: invert(1);
+    box-shadow: 0 0 8px 2px var(--accent-glow);
+  }
+
+  /* Spinner de carga blanco → oscuro */
+  .container-loading img {
+    filter: invert(1);
+  }
+  /* NOTA: los logos de skills e iconos SVG NO se filtran — se
+     muestran tal cual, con sus colores originales, en ambos temas. */
+}
+
+@media screen and (max-width: 900px) {
+  body {
+    padding-top: 15vh;
+  }
+}
+@media screen and (max-width: 600px) {
+  body {
     padding-top: 18vh;
   }
 }

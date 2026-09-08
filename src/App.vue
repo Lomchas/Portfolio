@@ -1,10 +1,15 @@
 <template>
   <div class="main-container">
+    <Background3D />
     <Nav :small-navbar="isSmall" />
     <!-- v-if desmonta el spinner del DOM cuando no se necesita
          (libera nodos/memoria en vez de solo ocultarlo). -->
     <Loading v-if="state.loading" />
-    <RouterView />
+    <RouterView v-slot="{ Component }">
+      <Transition name="page" mode="out-in">
+        <component :is="Component" />
+      </Transition>
+    </RouterView>
     <Footer />
   </div>
 </template>
@@ -13,18 +18,13 @@
 /**
  * App.vue
  * ---------------------------------------------------------------
- * Componente raíz: orquesta el layout (Nav, Loading, vistas, Footer)
- * y realiza la carga inicial de datos de la API.
- *
- * Migrado a <script setup> (Composition API estándar de Vue 3):
- *  - Menos boilerplate: no hace falta export default, ni registrar
- *    componentes, ni retornar bindings manualmente.
- *  - Mejor rendimiento: el compilador genera código más optimizado
- *    al conocer estáticamente las variables usadas en el template.
+ * Componente raíz: orquesta el layout (Background3D, Nav, Loading,
+ * vistas con transición, Footer) y realiza la carga inicial de datos.
  *
  * Las 3 peticiones iniciales se ejecutan EN PARALELO con Promise.all
  * y el listener de scroll se limpia en onBeforeUnmount (sin leaks).
  */
+import Background3D from "./components/layout/background/Background3D.vue";
 import Footer from "./components/layout/footer/Footer.vue";
 import Nav from "./components/layout/nav/Nav.vue";
 import Loading from "./components/layout/loading/Loading.vue";
@@ -68,14 +68,26 @@ onBeforeUnmount(() => {
 });
 </script>
 
-<style scoped>
-.main-container {
-  position: relative;
-}
-</style>
+<style lang="sass">
+.main-container
+  position: relative
+  width: 100%
 
-<style scoped>
-.main-container {
-  position: relative;
-}
+// Transición de página al cambiar de ruta (fade + slide sutil).
+.page-enter-active,
+.page-leave-active
+  transition: opacity 0.28s ease, transform 0.28s ease
+
+.page-enter-from
+  opacity: 0
+  transform: translateY(14px)
+
+.page-leave-to
+  opacity: 0
+  transform: translateY(-10px)
+
+@media (prefers-reduced-motion: reduce)
+  .page-enter-active,
+  .page-leave-active
+    transition: none
 </style>

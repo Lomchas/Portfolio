@@ -5,8 +5,11 @@
   position: fixed;
   top: 0;
   left: 0;
-  background: #242424;
-  width: 100vw;
+  background: var(--bg-nav);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--border);
+  width: 100%;
   height: 20vh;
   display: flex;
   flex-direction: row;
@@ -15,9 +18,43 @@
   z-index: 1000;
   transition: all 0.5s ease-in-out;
 
+  // ---- Botón de tema claro/oscuro ----
+  .theme-toggle {
+    width: 46px;
+    height: 46px;
+    margin: 0 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    color: var(--accent);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+
+    .theme-icon {
+      width: 22px;
+      height: 22px;
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    &:hover {
+      transform: rotate(30deg) scale(1.1);
+      box-shadow: 0 0 18px var(--accent-glow);
+      border-color: var(--accent);
+    }
+
+    &:active .theme-icon {
+      transform: rotate(180deg) scale(0.85);
+    }
+  }
+
   .container-mainIfo {
     margin: 0 20px 0 40px;
-    width: 30%;
+    flex: 1;
+    min-width: 0;
     height: 100%;
     display: flex;
     justify-content: flex-start;
@@ -41,9 +78,9 @@
       transition: all 0.5s ease-in-out;
 
       .name {
-        font-family: "Bruno Ace SC", cursive;
+        font-family: var(--font-display);
         margin: 0;
-        color: #2b97fa;
+        color: var(--accent);
         transition: all 0.5s ease-in-out;
       }
 
@@ -63,8 +100,8 @@
         white-space: nowrap;
         border-right: 4px solid;
         width: 18ch;
-        color: whitesmoke;
-        font-family: "Bruno Ace SC", cursive;
+        color: var(--text-muted);
+        font-family: var(--font-display);
         font-size: 16px;
         font-weight: bold;
         margin: 0;
@@ -77,8 +114,9 @@
   }
 
   .menu-options {
-    width: 60%;
-    margin: 0 40px 0 20px;
+    width: auto;
+    flex-shrink: 1;
+    margin: 0 20px 0 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -89,37 +127,42 @@
       margin: 0;
       padding: 0;
       width: 100%;
+      min-width: 0;
       height: 60px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       list-style: none;
-      gap: 10px;
+      gap: 6px;
 
       a {
-        color: rgba(255, 255, 255, 0.637);
+        color: var(--text-muted);
         height: 60%;
         background: transparent;
-        padding: 0px 25px;
+        padding: 0px clamp(10px, 1.6vw, 25px);
         display: flex;
         justify-content: center;
         align-items: center;
         cursor: pointer;
         border-radius: 8px;
         position: relative;
+        font-family: var(--font-display);
+        font-size: clamp(12px, 1vw, 14px);
+        letter-spacing: 1px;
+        white-space: nowrap;
       }
 
       .active {
-        color: white;
+        color: var(--text);
         transform: scale(1);
-        box-shadow: 0px 5px 25px #2b96facb;
+        box-shadow: 0px 5px 25px var(--accent-glow);
         transition: all 0.3s;
       }
 
       .led-effect:hover {
-        color: white;
+        color: var(--text);
         transform: scale(1);
-        box-shadow: 0px 5px 25px #2b96facb;
+        box-shadow: 0px 5px 25px var(--accent-glow);
         transition: all 0.3s;
       }
     }
@@ -135,7 +178,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: start;
-    background-color: #1d1d1d;
+    background-color: var(--bg-soft);
     position: absolute;
     right: 0;
     top: 0;
@@ -150,7 +193,7 @@
       font-size: 24px;
       background-color: transparent;
       border: none;
-      text-shadow: 0px 2px 8px #2b96fa;
+      text-shadow: 0px 2px 8px var(--accent);
       cursor: pointer;
       transition: all 0.3s ease-in-out;
     }
@@ -170,9 +213,9 @@
       gap: 30px;
 
       a {
-        color: rgba(255, 255, 255, 0.486);
-        font-family: "Bruno Ace SC", cursive;
-        border-bottom: 1px solid #2b96facb;
+        color: var(--text-muted);
+        font-family: var(--font-display);
+        border-bottom: 1px solid var(--accent-glow);
         width: 90%;
         height: 50px;
         padding: 0 10px 0 0;
@@ -182,14 +225,14 @@
       }
 
       a:hover{
-        box-shadow: 0 0 10px 2px #2b96fa;
+        box-shadow: 0 0 10px 2px var(--accent);
         border: none;
         border-radius: 10px;
       }
 
       .active {
-        color: white;
-        box-shadow: 0 0 10px 2px #2b96fa;
+        color: var(--text);
+        box-shadow: 0 0 10px 2px var(--accent);
         border: none;
         border-radius: 10px;
       }
@@ -203,43 +246,52 @@
   }
 
   .container-button-bar {
-    transform: translateX(120px);
-    transition: all 1s ease-in;
-    position: absolute;
-    right: 0;
     display: flex;
-    width: 20%;
     justify-content: flex-end;
     align-items: center;
-    padding: 0 40px 0;
+    gap: 14px;
+    margin: 0 22px;
+    flex-shrink: 0;
+    z-index: 1001;
 
+    // En escritorio (menú visible) no se muestra la hamburguesa.
     .btn-bar {
+      display: none;
       cursor: pointer;
-      width: 50px;
-      height: 50px;
-      padding: 0;
+      width: 42px;
+      height: 42px;
+      padding: 7px;
       background-color: transparent;
       border: none;
       border-radius: 50%;
-      transition: all 1s ease-in-out;
+      transition: all 0.3s ease-in-out;
 
       img {
         width: 100%;
-        filter: drop-shadow(0px 0px 8px #2b96facb);
+        filter: drop-shadow(0px 0px 8px var(--accent-glow));
       }
     }
 
-    .btn-bar :hover {
+    .btn-bar:hover {
       transform: scale(1.1);
-      filter: drop-shadow(0px 0px 10px #2b96fa);
     }
+
+    .btn-bar :hover {
+      filter: drop-shadow(0px 0px 10px var(--accent));
+    }
+  }
+
+  // Con el nav compacto (scroll) el menú desaparece: la hamburguesa
+  // vuelve a ser necesaria incluso en escritorio.
+  &.smallNav .container-button-bar .btn-bar {
+    display: block;
   }
 }
 
 .smallNav {
   height: 10vh !important;
-  background: #1d1d1d;
-  width: 100vw;
+  background: var(--bg-soft);
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -248,8 +300,7 @@
   .container-mainIfo {
     margin: 0 20px 0 20px;
     width: 70%;
-    height: 100%;
-    display: flex;
+    height: 100%;    display: flex;
     justify-content: flex-start;
     align-items: center;
     gap: 15px;
@@ -286,7 +337,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: start;
-    background-color: #1d1d1d;
+    background-color: var(--bg-soft);
     position: absolute;
     right: 0;
     top: 0;
@@ -301,7 +352,7 @@
       font-size: 24px;
       background-color: transparent;
       border: none;
-      text-shadow: 0px 2px 8px #2b96fa;
+      text-shadow: 0px 2px 8px var(--accent);
       cursor: pointer;
       transition: all 0.3s ease-in-out;
     }
@@ -321,9 +372,9 @@
       gap: 30px;
 
       a {
-        color: rgba(255, 255, 255, 0.486);
-        font-family: "Bruno Ace SC", cursive;
-        border-bottom: 1px solid #2b96facb;
+        color: var(--text-muted);
+        font-family: var(--font-display);
+        border-bottom: 1px solid var(--accent-glow);
         width: 90%;
         height: 50px;
         padding: 0 10px 0 0;
@@ -333,14 +384,14 @@
       }
 
       a:hover{
-        box-shadow: 0 0 10px 2px #2b96fa;
+        box-shadow: 0 0 10px 2px var(--accent);
         border: none;
         border-radius: 10px;
       }
 
       .active {
-        color: white;
-        box-shadow: 0 0 10px 2px #2b96fa;
+        color: var(--text);
+        box-shadow: 0 0 10px 2px var(--accent);
         border: none;
         border-radius: 10px;
       }
@@ -355,11 +406,12 @@
 
   .container-button-bar {
     display: flex;
-    transform: translateX(0px);
-    width: 20%;
     justify-content: flex-end;
     align-items: center;
-    padding: 0 40px 0;
+    gap: 16px;
+    margin: 0 30px;
+    flex-shrink: 0;
+    z-index: 1001;
 
     .btn-bar {
       cursor: pointer;
@@ -373,13 +425,16 @@
 
       img {
         width: 100%;
-        filter: drop-shadow(0px 0px 8px #2b96facb);
+        filter: drop-shadow(0px 0px 8px var(--accent-glow));
       }
     }
 
-    .btn-bar :hover {
+    .btn-bar:hover {
       transform: scale(1.1);
-      filter: drop-shadow(0px 0px 10px #2b96fa);
+    }
+
+    .btn-bar :hover {
+      filter: drop-shadow(0px 0px 10px var(--accent));
     }
   }
 }

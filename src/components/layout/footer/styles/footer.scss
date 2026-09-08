@@ -1,58 +1,121 @@
-// Modernización Sass: @use sustituye a @import (deprecado).
-// Nota: @use debe ir siempre al inicio del archivo.
-@use "./footer@media.scss" as *;
+// footer.scss - pie de pagina: info alineada a la izquierda,
+// redes a la derecha, todo dentro de un contenedor centrado.
+@use './footer@media.scss' as *;
 
 .container-footer {
-    margin: 300px 0 0 0;
-    padding: 20px;
-    border-top: 2px solid white;
+  margin: 220px 0 0;
+  padding: 44px 6vw 48px;
+  border-top: 1px solid var(--border);
+  background: var(--card);
+  backdrop-filter: var(--glass-blur);
+  width: 100%;
 
-    .footer-content{
+  .footer-content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 32px;
+
+    // ---- Bloque de informacion (izquierda) ----
+    .footer-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-width: 280px;
+
+      .footer-name {
+        margin: 0 0 16px;
+        font-family: var(--font-display);
+        font-size: 1.35rem;
+        line-height: 1.2;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+
+        .footer-alias {
+          font-size: 0.95rem;
+          opacity: 0.7;
+        }
+      }
+
+      // Lista etiqueta / valor perfectamente alineada en columnas.
+      .info-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
         display: flex;
-        flex-direction: row-reverse;
-        align-items: center;
-        justify-content: flex-end;
-        flex-wrap: wrap;
-        gap: 30px;
+        flex-direction: column;
+        gap: 10px;
 
-        .footer-info{
-            display: flex;
-            flex-direction: column;
-            min-width: 500px;
+        li {
+          display: grid;
+          grid-template-columns: 96px auto;
+          align-items: baseline;
+          column-gap: 14px;
 
-            h2{
-                margin: 0;
-                font-family: "Bruno Ace SC", cursive;
-            }
-            p{
-                margin: 0 0 20px 0;
-                font-family: "Bruno Ace SC", cursive;
-                letter-spacing: 5px;
-                opacity: .8;
-                a{
-                    color: #2b96fa;
-                }
-            }
+          .label {
+            font-family: var(--font-display);
+            font-size: 0.72rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+          }
 
+          .value {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            color: var(--text);
+            word-break: break-word;
+          }
         }
-        
-        .footer-links{
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 10px;
-
-            a{
-                img{
-                    width: 50px;
-                    opacity: .5;
-                    border-radius: 50%;
-                    box-shadow: 0 0 8px 2px #2b96fa;
-                }
-            }
-        }
+      }
     }
+
+    // ---- Redes sociales (derecha): píldora glass contenedora,
+    //      alineada verticalmente con el bloque de información. ----
+    .footer-links {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 22px;
+      background: var(--card-hover);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      backdrop-filter: var(--glass-blur);
+
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          width: 42px;
+          height: 42px;
+          object-fit: contain;
+          border-radius: 50%;
+          transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+            filter 0.3s ease;
+        }
+
+        &:hover img {
+          transform: translateY(-4px) scale(1.12);
+          filter: drop-shadow(0 0 10px var(--accent-glow));
+        }
+      }
+    }
+  }
 }
 
-
-
+// ---- Responsive ----
+@media screen and (max-width: 700px) {
+  .container-footer .footer-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

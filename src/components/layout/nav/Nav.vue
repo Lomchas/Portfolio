@@ -39,7 +39,23 @@
         </RouterLink>
       </ol>
     </nav>
+    <!-- Botón de tema + menú móvil: siempre visibles, sin overlaps. -->
     <div class="container-button-bar">
+      <button
+        class="theme-toggle"
+        type="button"
+        :aria-label="theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'"
+        :title="theme === 'dark' ? 'Light mode' : 'Dark mode'"
+        @click="toggleTheme"
+      >
+        <svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <g v-if="theme === 'dark'">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+          </g>
+          <path v-else d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      </button>
       <button class="btn-bar" type="button" aria-label="Open menu" @click="openMenu()">
         <img :src="barsIcon" alt="Menu" />
       </button>
@@ -65,6 +81,7 @@ import barsIcon from "../../../assets/icons/nav/bars-icon-menu.png";
 import { onBeforeUnmount, onMounted, ref } from "vue";
 import { RouterLink } from "vue-router";
 import { useState } from "../../../utils/globalState";
+import { useTheme } from "../../../composables/useTheme";
 
 /** Props: true cuando la página está desplazada > 20px (nav compacto). */
 defineProps({
@@ -77,6 +94,7 @@ const menuLinks = [
   { path: "/about-me", label: "About-Me" },
   { path: "/cv", label: "CV" },
   { path: "/web-portfolio", label: "Web-Portfolio" },
+  { path: "/ai-integrations", label: "AI" },
   { path: "/contact-me", label: "Contact-Me" },
 ];
 
@@ -84,6 +102,9 @@ const menuLinks = [
 const isOpen = ref(false);
 
 const state = useState();
+
+/** Tema claro/oscuro (compartido globalmente, persiste en localStorage). */
+const { theme, toggleTheme } = useTheme();
 
 const openMenu = () => { isOpen.value = true; };
 const closeMenu = () => { isOpen.value = false; };

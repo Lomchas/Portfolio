@@ -1,157 +1,276 @@
-// Modernización Sass: @use sustituye a @import (deprecado).
+// home.scss — estilos de la vista Home (hero + skills)
 @use './home@media.scss' as *;
 
 .container-home {
-  width: calc(100vw - 17px);
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
 
-  .container-greeting {
-    padding: 0px;
+  // ---- HERO ----
+  .hero {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    gap: 20px;
+    align-items: center;
+    gap: 60px;
+    padding: 30px 5vw 50px;
     overflow: hidden;
 
-    .container-illustration {
-      height: 70%;  
-      display: flex;
-      justify-content: center;
-      background-image: url("/src/assets/bg-picture.svg");
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: cover;
-      border-radius: 50%;
-      border: 10px solid #2b97fa;
-      box-shadow: 0 5px 20px rgba(0, 0, 0);
-      overflow: hidden;
-      transition: all .3s ease-in-out;
+    .hero-text {
+      max-width: 560px;
 
+      .hero-hi {
+        margin: 0;
+        font-size: 1.3rem;
+        color: var(--text-muted);
+        letter-spacing: 1px;
+      }
 
-      a {
-        width: 100%;
-        height: 100%;
+      .hero-name {
+        margin: 6px 0;
+        font-family: var(--font-display);
+        font-size: clamp(2.2rem, 5vw, 3.6rem);
+        line-height: 1.1;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent));
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: hero-shine 6s linear infinite;
+      }
+
+      .hero-role {
+        margin: 0 0 26px;
+        font-family: var(--font-display);
+        font-size: 1.05rem;
+        color: var(--text-muted);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .hero-cta {
         display: flex;
-        align-items: flex-end;
-        img {
-          width: 100%;
-          height: 100%;
-          filter: drop-shadow(0 0 15px #000000);
+        align-items: center;
+        gap: 18px;
+        flex-wrap: wrap;
+
+        .btn-primary {
+          padding: 12px 26px;
+          border-radius: 12px;
+          font-family: var(--font-display);
+          font-size: 0.95rem;
+          color: #fff;
+          background: linear-gradient(120deg, var(--accent), var(--accent-2));
+          box-shadow: 0 6px 24px var(--accent-glow);
+          transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+
+          &:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 10px 34px var(--accent-glow);
+            color: #fff;
+          }
+        }
+
+        .btn-ghost {
+          padding: 12px 26px;
+          border-radius: 12px;
+          font-family: var(--font-display);
+          font-size: 0.95rem;
+          color: var(--text);
+          border: 1px solid var(--border);
+          background: var(--card);
+          transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+
+          &:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 6px 20px var(--accent-glow);
+          }
         }
       }
     }
 
-    .container-skills {
-      border-left: 2px solid gray;
-      padding: 0 40px;
-      max-width: 60%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      gap: 20px;
-      flex-grow: 1;
+    // Tarjeta de perfil con tilt 3D (rotada por JS con perspective()).
+    .card-3d {
+      width: 340px;
+      height: 340px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      transition: transform 0.15s ease-out;
+      transform-style: preserve-3d;
 
-      .skill {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+      .container-illustration {
         width: 100%;
         height: 100%;
-        margin: 10px 0 0 0;
+        display: flex;
+        justify-content: center;
+        background-image: url("/src/assets/bg-picture.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        border-radius: 50%;
+        border: 6px solid transparent;
+        background-clip: padding-box;
+        box-shadow: 0 0 0 4px var(--border), 0 0 50px var(--accent-glow),
+          var(--shadow);
+        overflow: hidden;
+        animation: profile-float 6s ease-in-out infinite;
+        transition: box-shadow 0.4s ease;
 
-        hr{
-          width: 100%;
-          opacity: .3;
-        }
-
-        .title {
-          margin: 0;
-          font-size: 16px;
-          font-weight: bold;
-          font-style: oblique;
-          font-family: "Bruno Ace SC", cursive;
-          text-overflow: ellipsis;
-          text-transform: uppercase;
-          letter-spacing: 2px;
-        }
-
-        .container-skill-item {
+        a {
           width: 100%;
           height: 100%;
           display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 10px;
+          align-items: flex-end;
 
-          .skills-wrapper {
+          img {
             width: 100%;
             height: 100%;
-            margin-top: 10px;
-            padding: 10px 20px;
-            display: flex;
-            align-items: flex-end;
-            overflow-x: auto;
-            overflow-y: hidden;
-            gap: 20px;
+            object-fit: cover;
+            filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.6));
+          }
+        }
+      }
 
-            .skill-item {
-              cursor: pointer;
-              padding: 10px;
-              border-radius: 10px;
-              width: 80px;
-              height: 100px;
-              min-width: 80px;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              justify-content: flex-end;
-              gap: 5px;
-              transition: all 0.5s ease-out;
+      &:hover .container-illustration {
+        box-shadow: 0 0 0 4px var(--accent), 0 0 80px var(--accent-glow),
+          var(--shadow);
+      }
+    }
+  }
+
+  // ---- SKILLS ----
+  .container-skills {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 4vw 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .skill {
+      background: var(--card);
+      border: 1px solid var(--border);
+      backdrop-filter: var(--glass-blur);
+      border-radius: 18px;
+      padding: 18px 24px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease,
+        transform 0.3s ease;
+
+      &:hover {
+        border-color: var(--accent);
+        box-shadow: 0 0 26px var(--accent-glow);
+        transform: translateY(-4px);
+      }
+
+      hr {
+        width: 100%;
+        border: none;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        opacity: 0.5;
+      }
+
+      .title {
+        margin: 0;
+        font-size: 16px;
+        font-weight: bold;
+        font-style: oblique;
+        font-family: var(--font-display);
+        text-overflow: ellipsis;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--accent);
+      }
+
+      .container-skill-item {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .skills-wrapper {
+          width: 100%;
+          margin-top: 10px;
+          padding: 10px 6px;
+          display: flex;
+          align-items: flex-end;
+          overflow-x: auto;
+          overflow-y: hidden;
+          gap: 20px;
+
+          // Tarjeta de skill con hover 3D (levanta y rota levemente).
+          .skill-item {
+            cursor: pointer;
+            padding: 12px 10px;
+            border-radius: 14px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            width: 92px;
+            height: auto;
+            min-height: 116px;
+            min-width: 92px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 5px;
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.35s ease, border-color 0.35s ease;
+
+            img {
+              width: 40px;
+              transition: transform 0.35s ease;
+            }
+
+            span {
+              text-align: center;
+              font-weight: bold;
+              font-size: 0.8rem;
+              color: var(--text);
+            }
+
+            &:hover {
+              transform: translateY(-8px) rotateX(8deg) scale(1.06);
+              border-color: var(--accent);
+              box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35),
+                0 0 18px var(--accent-glow);
 
               img {
-                width: 40px;
-                transition: all 0.5s ease-in;
-              }
-
-              @keyframes turning {
-                from {
-                  transform: rotate(0deg);
-                }
-              }
-
-              span {
-                text-align: center;
-                font-weight: bold;
-                text-shadow: 2px 0 5px black;
+                transform: scale(1.2) rotate(-6deg);
               }
             }
-
-            .skill-item:hover {
-              transform: scale(1.08);
-              box-shadow: 0 0 10px rgba(163, 163, 163, 0.651);
-            }
-          }
-
-          .skills-wrapper::-webkit-scrollbar {
-            height: 7px;
-          }
-
-          .skills-wrapper::-webkit-scrollbar-track {
-            background-color: #f2f2f2b0; /* Color del fondo de la barra de desplazamiento */
-          }
-
-          .skills-wrapper::-webkit-scrollbar-thumb {
-            background-color: #00000096; /* Color de la barra de desplazamiento */
-          }
-
-          .skills-wrapper::-webkit-scrollbar-thumb:hover {
-            background-color: #555555; /* Color de la barra de desplazamiento al pasar el cursor por encima */
           }
         }
       }
     }
+  }
+}
+
+// ---- Keyframes del hero ----
+@keyframes hero-shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+@keyframes profile-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero .hero-name {
+    animation: none;
+  }
+  .hero .card-3d .container-illustration {
+    animation: none;
   }
 }
