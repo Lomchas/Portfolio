@@ -7,7 +7,7 @@
  *  - t('ruta.clave', {param}) con reemplazo de parámetros {x}.
  *  - levelKey(percent): clave del nivel de skill según porcentaje.
  */
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import es from "../i18n/locales/es";
 import en from "../i18n/locales/en";
 import pt from "../i18n/locales/pt";
@@ -31,6 +31,18 @@ const getInitialLocale = () => {
 };
 
 const locale = ref(getInitialLocale());
+
+// SEO + accesibilidad: el atributo lang de <html> SIEMPRE refleja el
+// idioma activo (lectores de pantalla y crawlers lo necesitan).
+document.documentElement.lang = locale.value;
+watch(locale, (lang) => {
+  document.documentElement.lang = lang;
+  const og = document.querySelector('meta[property="og:locale"]');
+  if (og) {
+    const ogMap = { es: "es_CO", en: "en_US", pt: "pt_BR", zh: "zh_CN" };
+    og.setAttribute("content", ogMap[lang] ?? "es_CO");
+  }
+});
 
 /** Clave de nivel de skill según porcentaje (0-100) — exportada. */
 export const levelKey = (percent) => {

@@ -20,6 +20,17 @@ export default defineConfig({
     target: "es2019",
     chunkSizeWarningLimit: 300,
     assetsInlineLimit: 8192,
+    rollupOptions: {
+      output: {
+        // Split de vendor: las librerías casi nunca cambian entre
+        // deploys, así que el navegador las cachea por separado y
+        // cada nueva versión solo invalida el chunk de la app.
+        manualChunks: {
+          vendor: ["vue", "vue-router"],
+          http: ["axios"],
+        },
+      },
+    },
   },
 });
 

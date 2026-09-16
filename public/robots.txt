@@ -1,0 +1,6 @@
+# Permite el rastreo completo del sitio (no hay rutas privadas).
+User-agent: *
+Allow: /
+
+# Sitemap para crawlers
+Sitemap: https://portfolio-daniellosada.vercel.app/sitemap.xml

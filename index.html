@@ -10,6 +10,71 @@
       content="Daniel Losada - Full Stack Web Developer. Portfolio with skills, projects, CV and contact."
     />
     <meta name="theme-color" content="#070b14" />
+    <!-- Canonical: evita contenido duplicado entre dominios/parámetros. -->
+    <link rel="canonical" href="https://portfolio-daniellosada.vercel.app/" />
+    <!-- Open Graph: cómo se ve el enlace al compartirlo (WhatsApp,
+         LinkedIn, Slack...). Crítico para reclutadores que lo reciben
+         por chat. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Daniel Losada — Portfolio" />
+    <meta property="og:url" content="https://portfolio-daniellosada.vercel.app/" />
+    <meta property="og:title" content="Daniel Losada — Full-Stack Developer & Automation" />
+    <meta
+      property="og:description"
+      content="Full-Stack developer with real industrial experience (Renault Sofasa). I automate processes with AI and integrations that save hours of work every week."
+    />
+    <meta property="og:image" content="https://portfolio-backend-1-yhze.onrender.com/assets/profile.png" />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale:alternate" content="pt_BR" />
+    <meta property="og:locale:alternate" content="zh_CN" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Daniel Losada — Full-Stack Developer & Automation" />
+    <meta
+      name="twitter:description"
+      content="Full-Stack developer with real industrial experience. AI + workflow automation for businesses."
+    />
+    <meta name="twitter:image" content="https://portfolio-backend-1-yhze.onrender.com/assets/profile.png" />
+    <!-- Datos estructurados: Google entiende quién eres y qué ofreces
+         (rich results con nombre, cargo, habilidades y servicios). -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "name": "Daniel Losada",
+            "alternateName": "Lomchas",
+            "jobTitle": "Full-Stack Developer",
+            "url": "https://portfolio-daniellosada.vercel.app/",
+            "image": "https://portfolio-backend-1-yhze.onrender.com/assets/profile.png",
+            "sameAs": [
+              "https://github.com/Lomchas",
+              "https://www.linkedin.com/in/daniel-losada17/"
+            ],
+            "knowsAbout": [
+              "Frontend Development",
+              "Backend Development",
+              "Workflow Automation",
+              "AI Integration",
+              "Prompt Engineering"
+            ],
+            "worksFor": {
+              "@type": "Organization",
+              "name": "Renault Sofasa Colombia"
+            }
+          },
+          {
+            "@type": "Service",
+            "name": "Workflow Automation & AI Integration for Businesses",
+            "provider": { "@id": "https://portfolio-daniellosada.vercel.app/#person" },
+            "areaServed": "LatAm",
+            "description": "Automation of business workflows and AI tool integration for micro and small businesses."
+          }
+        ]
+      }
+    </script>
     <!-- Aplica el tema ANTES del primer render para evitar "flash"
          del tema incorrecto (lee localStorage / preferencia del sistema). -->
     <script>

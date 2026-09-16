@@ -32,6 +32,10 @@ import { RouterView } from "vue-router";
 import { onBeforeUnmount, onMounted, ref } from "vue";
 import { useState } from "./utils/globalState";
 import {
+  hydrateFromCache,
+  writeCache,
+} from "./utils/apiCache";
+import {
   getAboutMeInformation,
   getHomeInformation,
   getProjectsInformation,
@@ -48,6 +52,11 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
+  // --- SWR: hidratación instantánea desde caché (si existe) ---
+  // Un visitante recurrente ve la web AL INSTANTE; los datos frescos
+  // se revalidan en background y reescriben la caché (invisible).
+  const hydrated = hydrateFromCache(state);
+
   // Peticiones en paralelo: reduce el tiempo de carga inicial
   // de ~3x RTT a 1x RTT respecto a la versión secuencial.
   // Cada service desactiva `loading` al terminar.
@@ -55,7 +64,14 @@ onMounted(() => {
     getHomeInformation("/experiences", state),
     getAboutMeInformation("/aboutMe", state),
     getProjectsInformation("/projects", state),
-  ]).catch((err) => console.error("Initial data load failed:", err));
+  ])
+    .then(() => writeCache(state)) // revalida la caché con datos frescos
+    .catch((err) => {
+      console.error("Initial data load failed:", err);
+      // Si la API falla y HAY caché (aunque expirada), el usuario
+      // ya ve la web hidratada: degradación elegante.
+      if (!hydrated) writeCache(state);
+    });
 
   // passive: true permite al navegador hacer scroll sin esperar.
   window.addEventListener("scroll", handleScroll, { passive: true });
