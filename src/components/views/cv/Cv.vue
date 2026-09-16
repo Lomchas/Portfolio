@@ -7,7 +7,7 @@
           <img :src="illustration2" alt="CV" loading="lazy" />
         </div>
         <div>
-          <h2 class="title">My Curriculum Vitae</h2>
+          <h2 class="title">{{ t('cv.title') }}</h2>
           <p class="cv-meta">
             <span class="meta-chip">👤 {{ state.aboutMe[0]?.name }}</span>
             <span class="meta-chip">💼 {{ state.aboutMe[0]?.position }}</span>
@@ -38,8 +38,16 @@
         </a>
       </div>
       <div class="wrapper-cv">
-        <!-- Visor embebido del CV alojado en Google Drive. -->
-        <embed zoom="90" class="cv" :src="cvPreviewUrl" type="application/pdf" />
+        <!-- Visor embebido del CV alojado en Google Drive.
+             iframe (no <embed>): es el formato que el visor de Drive
+             soporta de forma fiable en todos los navegadores. -->
+        <iframe
+          class="cv"
+          :src="cvPreviewUrl"
+          title="CV - Daniel Losada"
+          loading="lazy"
+          allow="autoplay"
+        ></iframe>
       </div>
     </div>
 
@@ -59,6 +67,7 @@
  */
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import { useState } from "../../../utils/globalState";
+import { useI18n } from "../../../composables/useI18n";
 
 /** ID del archivo del CV en Google Drive. */
 const CV_FILE_ID = "1JrgENjJKH6ouVq4I1mDJ3YtRH1hzPZ9s";

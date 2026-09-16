@@ -256,6 +256,95 @@
   }
 }
 
+// ---- Sección de habilidades fullstack ----
+.fullstack-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 10px auto 0;
+  padding: 40px 4vw 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .fs-eyebrow {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .fs-title {
+    margin: 10px 0 8px;
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    text-align: center;
+    color: var(--text);
+  }
+
+  .fs-lead {
+    margin: 0 auto 26px;
+    max-width: 640px;
+    text-align: center;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  .fs-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+
+    .fs-card {
+      padding: 24px 20px;
+      border-radius: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      backdrop-filter: var(--glass-blur);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.35s ease, box-shadow 0.35s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+        border-color: var(--accent);
+        box-shadow: 0 0 22px var(--accent-glow);
+      }
+
+      .fs-icon {
+        font-size: 1.7rem;
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      h3 {
+        margin: 0 0 8px;
+        font-family: var(--font-display);
+        font-size: 0.98rem;
+        color: var(--accent);
+      }
+
+      p {
+        margin: 0;
+        font-size: 0.85rem;
+        line-height: 1.65;
+        color: var(--text-muted);
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero .hero-name {
+    animation: none;
+  }
+  .hero .card-3d .container-illustration {
+    animation: none;
+  }
+}
+
 @keyframes profile-float {
   0%,
   100% {

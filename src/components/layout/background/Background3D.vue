@@ -27,7 +27,11 @@ const canvasRef = ref(null);
 let animationId = null;
 let stars = [];
 
-const STAR_COUNT = 160;
+const STAR_COUNT = 80;
+/** Throttle: ~30fps es suficiente para un fondo; reduce carga de CPU
+ *  al navegar entre secciones (cada frame de canvas compite con Vue). */
+const FRAME_THRESHOLD = 33;
+let lastFrameTime = 0;
 
 const initStars = (w, h) => {
   stars = Array.from({ length: STAR_COUNT }, () => ({
@@ -69,41 +73,45 @@ onMounted(() => {
     attributeFilter: ["data-theme"],
   });
 
-  const drawFrame = () => {
-    ctx.clearRect(0, 0, w, h);
+  const drawFrame = (timestamp) => {
+    // Throttle: dibuja solo si pasaron FRAME_THRESHOLD ms (~30fps).
+    if (timestamp - lastFrameTime >= FRAME_THRESHOLD) {
+      lastFrameTime = timestamp;
+      ctx.clearRect(0, 0, w, h);
 
-    for (const star of stars) {
-      star.z -= 1.2; // avance hacia el observador
-      if (star.z <= 1) {
-        star.z = w;
-        star.x = (Math.random() - 0.5) * w;
-        star.y = (Math.random() - 0.5) * h;
-      }
+      for (const star of stars) {
+        star.z -= 1.2; // avance hacia el observador
+        if (star.z <= 1) {
+          star.z = w;
+          star.x = (Math.random() - 0.5) * w;
+          star.y = (Math.random() - 0.5) * h;
+        }
 
-      // Proyección en perspectiva: x/z escala al acercarse.
-      const k = 128 / star.z;
-      const px = star.x * k + w / 2;
-      const py = star.y * k + h / 2;
+        // Proyección en perspectiva: x/z escala al acercarse.
+        const k = 128 / star.z;
+        const px = star.x * k + w / 2;
+        const py = star.y * k + h / 2;
 
-      if (px < 0 || px > w || py < 0 || py > h) continue;
+        if (px < 0 || px > w || py < 0 || py > h) continue;
 
-      // Tamaño y opacidad crecen con la cercanía (profundidad).
-      const size = Math.max(0.4, (1 - star.z / w) * 2.4);
-      const alpha = Math.min(1, (1 - star.z / w) * 1.2);
+        // Tamaño y opacidad crecen con la cercanía (profundidad).
+        const size = Math.max(0.4, (1 - star.z / w) * 2.4);
+        const alpha = Math.min(1, (1 - star.z / w) * 1.2);
 
-      ctx.beginPath();
-      ctx.arc(px, py, size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${starRgb}, ${alpha})`;
-      ctx.fill();
-
-      // Estela luminosa en las estrellas cercanas (efecto warp).
-      if (alpha > 0.7) {
-        ctx.strokeStyle = `rgba(${starRgb}, ${(alpha - 0.7) * 0.5})`;
-        ctx.lineWidth = size / 2;
         ctx.beginPath();
-        ctx.moveTo(px, py);
-        ctx.lineTo(px - star.x * k * 0.015, py - star.y * k * 0.015);
-        ctx.stroke();
+        ctx.arc(px, py, size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${starRgb}, ${alpha})`;
+        ctx.fill();
+
+        // Estela luminosa en las estrellas cercanas (efecto warp).
+        if (alpha > 0.7) {
+          ctx.strokeStyle = `rgba(${starRgb}, ${(alpha - 0.7) * 0.5})`;
+          ctx.lineWidth = size / 2;
+          ctx.beginPath();
+          ctx.moveTo(px, py);
+          ctx.lineTo(px - star.x * k * 0.015, py - star.y * k * 0.015);
+          ctx.stroke();
+        }
       }
     }
 
@@ -111,7 +119,7 @@ onMounted(() => {
   };
 
   if (reducedMotion) {
-    drawFrame();
+    drawFrame(performance.now());
     cancelAnimationFrame(animationId); // un solo frame estático
   } else {
     animationId = requestAnimationFrame(drawFrame);

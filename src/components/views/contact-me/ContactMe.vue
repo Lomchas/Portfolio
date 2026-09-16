@@ -99,13 +99,13 @@
               id="nameField"
               name="name"
               type="text"
-              :placeholder="t('contact.messagePlaceholder')"
+              placeholder=" "
               v-model.trim="form.name"
               @blur="touched.name = true"
             />
             <label for="nameField">{{ t('contact.nameLabel') }}</label>
             <span class="field-error" v-if="touched.name && !fieldsValid.name">
-              Please tell me your name
+              {{ t('contact.nameError') }}
             </span>
           </div>
 

@@ -10,15 +10,15 @@
         </h2>
         <ul class="info-list">
           <li>
-            <span class="label">Cargo</span>
+            <span class="label">{{ t('footer.position') }}</span>
             <span class="value">{{ state.aboutMe[0]?.position }}</span>
           </li>
           <li>
-            <span class="label">Ubicación</span>
+            <span class="label">{{ t('footer.location') }}</span>
             <span class="value">{{ state.aboutMe[0]?.location }}</span>
           </li>
           <li>
-            <span class="label">Correo</span>
+            <span class="label">{{ t('footer.email') }}</span>
             <a
               class="value"
               :href="`https://mail.google.com/mail/?view=cm&to=${state.aboutMe[0]?.email}`"

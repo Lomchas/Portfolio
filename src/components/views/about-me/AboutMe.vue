@@ -31,7 +31,7 @@
       <div class="about-grid">
         <article class="about-card card-bio" v-reveal>
           <h3 class="card-title">{{ t("about.whoAmI") }}</h3>
-          <p class="info">{{ state.aboutMe[0]?.description }}</p>
+          <p class="info">{{ description }}</p>
           <div class="container-btns">
             <RouterLink to="/contact-me" class="btn-primary">{{ t("about.hireMe") }}</RouterLink>
             <RouterLink to="/cv" class="btn-ghost">{{ t("about.checkCv") }}</RouterLink>
@@ -48,7 +48,7 @@
             v-reveal="i * 90"
           >
             <div class="area-head">
-              <h3 class="card-title">{{ area }}</h3>
+              <h3 class="card-title">{{ t(`about.areas.${area.toLowerCase()}`) }}</h3>
               <span class="area-count">{{ t("about.skillsCount", { n: skillCount(area) }) }}</span>
             </div>
             <div class="area-icons">
@@ -116,6 +116,19 @@ const skillCount = (area) => (state.languages[area] ?? []).length;
 
 /** Etiqueta de nivel coherente con la vista Home (traducida). */
 const levelLabel = (percent) => t(levelKey(percent));
+
+/**
+ * Descripción "¿Quién soy?" multidioma.
+ * Usa la traducción `about.description` del idioma activo; si el
+ * diccionario no la tiene (p. ej. clave nueva), cae al texto real de
+ * la base de datos para nunca mostrar la clave cruda ni vacío.
+ */
+const description = computed(() => {
+  const translated = t("about.description");
+  return translated === "about.description"
+    ? state.aboutMe[0]?.description
+    : translated;
+});
 
 const socialLinks = computed(() => [
   { href: state.aboutMe[0]?.github, icon: iconGitH, alt: "GitHub" },

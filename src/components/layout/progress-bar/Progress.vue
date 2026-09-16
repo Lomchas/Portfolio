@@ -11,7 +11,7 @@
         :style="i <= filledDots ? { background: colorProgress, boxShadow: `0 0 6px ${colorProgress}` } : {}"
       />
     </div>
-    <span class="level-label">{{ levelLabel }}</span>
+    <span class="level-label" :class="sizeClass">{{ levelLabel }}</span>
   </div>
 </template>
 
@@ -47,6 +47,18 @@ const filledDots = computed(() => Math.max(1, Math.ceil(props.percentProgress / 
 
 /** Etiqueta de nivel legible (traducida con i18n). */
 const levelLabel = computed(() => t(levelKey(props.percentProgress)));
+
+/**
+ * Escala de la etiqueta según su longitud: en vez de partir el texto
+ * en dos líneas (wrap), reduce el font-size para que SIEMPRE quepa
+ * en una sola línea dentro de la tarjeta de skill.
+ */
+const sizeClass = computed(() => {
+  const len = levelLabel.value.length;
+  if (len <= 7) return "";
+  if (len <= 10) return "sm";
+  return "xs";
+});
 </script>
 
 <style lang="sass">

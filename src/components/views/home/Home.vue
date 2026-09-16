@@ -49,6 +49,28 @@
         </div>
       </div>
     </div>
+
+    <!-- HABILIDADES FULLSTACK: demostrar capacidades reales, no solo
+         herramientas. Las herramientas de arriba se apoyan en estas
+         habilidades probadas en contexto industrial real. -->
+    <section class="fullstack-section" v-reveal>
+      <p class="fs-eyebrow">{{ t("home.abilities.eyebrow") }}</p>
+      <h2 class="fs-title">{{ t("home.abilities.title") }}</h2>
+      <p class="fs-lead">{{ t("home.abilities.lead") }}</p>
+
+      <div class="fs-grid">
+        <article
+          class="fs-card"
+          v-for="(item, i) in abilityKeys"
+          :key="item"
+          :style="{ '--d': i * 60 + 'ms' }"
+        >
+          <span class="fs-icon">{{ abilityIcons[i] }}</span>
+          <h3>{{ t(`home.abilities.items.${item}.t`) }}</h3>
+          <p>{{ t(`home.abilities.items.${item}.x`) }}</p>
+        </article>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -70,6 +92,10 @@ import { useI18n } from "../../../composables/useI18n.js";
 const { t } = useI18n();
 
 const state = useState();
+
+/** Habilidades fullstack demostradas en la sección inferior. */
+const abilityKeys = ["problems", "industrial", "apis", "ai", "architecture", "delivery"];
+const abilityIcons = ["🧠", "🏭", "🔌", "🤖", "📐", "🤝"];
 
 /** Estado del tilt 3D (grados de rotación según posición del ratón). */
 const tilt = reactive({ x: 0, y: 0 });

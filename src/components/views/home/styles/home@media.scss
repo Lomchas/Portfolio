@@ -14,6 +14,16 @@
       height: 260px;
     }
   }
+
+  .container-home .fullstack-section .fs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container-home .fullstack-section .fs-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media screen and (max-width: 600px) {
